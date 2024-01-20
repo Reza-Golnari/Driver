@@ -45,7 +45,15 @@ export default defineNuxtConfig({
       ErrorMessage: "VeeErrorMessage",
     },
   },
-  css: ["~/assets/css/font.css", "~/assets/css/global.css"],
-
-  devtools: { enabled: true },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: [
+    "~/assets/css/font.css",
+    "~/assets/css/global.css",
+    "~/assets/css/tailwind.css",
+  ],
 });

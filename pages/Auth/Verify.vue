@@ -81,6 +81,9 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth";
+import useAxios from "~/composables/useAxios";
+
+const { sendRequest } = useAxios();
 const runtimeConfig = useRuntimeConfig();
 const authStore = useAuthStore();
 
@@ -106,19 +109,15 @@ const four = useInputCode();
 // send code for user
 async function sendCode() {
   try {
-    await $fetch(`${runtimeConfig.public.API_BASE_URL}/otp/send-otp`, {
+    const response = await sendRequest({
       method: "POST",
-      headers: {
-        Accept: "application/vnd.api+json",
-        "Content-Type": "application/json",
-        // Add other headers as needed
-      },
-      body: {
-        model: route.query.type,
-        mobile: authStore.loginData.mobile,
-      },
+      url: "/otp/send-otp",
+      body: { model: route.query.type, mobile: authStore.loginData.mobile },
     });
-  } catch (error) {}
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 onMounted(() => {

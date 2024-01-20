@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="relative flex flex-col items-center justify-center min-h-screen p-4"
-  >
-    <div class="absolute top-3 left-0 text-4xl">
-      <SectionsBackButton />
-    </div>
+  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+    <!-- Back Button -->
+    <SectionsBackButton />
     <div class="flex h-52 w-52 -mr-24 justify-center">
       <img alt="Phone" class="h-max mx-auto" src="/images/sms.png" />
     </div>
@@ -70,7 +67,7 @@
             </div>
             <div class="flex flex-col space-y-3">
               <div class="flex items-center justify-end text-sm">
-                <button class="mx-auto border-b border-b-black">
+                <button class="mx-auto border-b border-b-black/50">
                   کد را دریافت نکردید؟
                 </button>
               </div>

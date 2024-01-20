@@ -1,10 +1,9 @@
 <template>
   <div
-    class="max-w-96 h-screen flex flex-col justify-between gap-y-4 py-3 pb-10"
+    class="max-w-96 h-screen flex flex-col justify-center gap-y-4 py-3 pb-10"
   >
-    <div class="text-4xl">
-      <SectionsBackButton />
-    </div>
+    <!-- Back Button -->
+    <SectionsBackButton />
     <div class="flex gap-4 flex-col items-between space-y-12">
       <NuxtImg
         src="/images/trucklogin.png"

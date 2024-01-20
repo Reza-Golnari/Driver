@@ -1,0 +1,149 @@
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir'),
+        url('/fonts/Vazir.woff2') format('woff2'),
+        url('/fonts/Vazir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Bold'), local('Vazir-Bold'),
+        url('/fonts/Vazir-Bold.woff2') format('woff2'),
+        url('/fonts/Vazir-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Light'), local('Vazir-Light'),
+        url('/fonts/Vazir-Light.woff2') format('woff2'),
+        url('/fonts/Vazir-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Light'), local('Vazir-Light'),
+        url('/fonts/Vazir-Light.woff2') format('woff2'),
+        url('/fonts/Vazir-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Bold'), local('Vazir-Bold'),
+        url('/fonts/Vazir-Bold.woff2') format('woff2'),
+        url('/fonts/Vazir-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir'),
+        url('/fonts/Vazir.woff2') format('woff2'),
+        url('/fonts/Vazir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Light'), local('Vazir-Light'),
+        url('/fonts/Vazir-Light.woff2') format('woff2'),
+        url('/fonts/Vazir-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir'),
+        url('/fonts/Vazir.woff2') format('woff2'),
+        url('/fonts/Vazir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Bold'), local('Vazir-Bold'),
+        url('/fonts/Vazir-Bold.woff2') format('woff2'),
+        url('/fonts/Vazir-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Medium'), local('Vazir-Medium'),
+        url('/fonts/Vazir-Medium.woff2') format('woff2'),
+        url('/fonts/Vazir-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Thin'), local('Vazir-Thin'),
+        url('/fonts/Vazir-Thin.woff2') format('woff2'),
+        url('/fonts/Vazir-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Thin'), local('Vazir-Thin'),
+        url('/fonts/Vazir-Thin.woff2') format('woff2'),
+        url('/fonts/Vazir-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Medium'), local('Vazir-Medium'),
+        url('/fonts/Vazir-Medium.woff2') format('woff2'),
+        url('/fonts/Vazir-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Thin'), local('Vazir-Thin'),
+        url('/fonts/Vazir-Thin.woff2') format('woff2'),
+        url('/fonts/Vazir-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Vazir';
+    src: local('Vazir Medium'), local('Vazir-Medium'),
+        url('/fonts/Vazir-Medium.woff2') format('woff2'),
+        url('/fonts/Vazir-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}

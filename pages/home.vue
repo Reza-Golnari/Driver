@@ -91,25 +91,37 @@
     <div
       class="mt-10 w-full max-w-sm space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12"
     >
-      <NuxtLink to="/Auth/login?type=shipper"
-        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-red-600 hover:text-white hover:ring-2 hover:ring-red-600 hover:ring-offset-2 h-10 px-4 w-full bg-red-600 text-white py-3 sm:py-4 md:py-5 lg:py-6"
+      <Swiper
+        :modules="[SwiperAutoplay, SwiperEffectCreative]"
+        :slides-per-view="1"
+        :loop="true"
+        :effect="'creative'"
+        :autoplay="{
+          delay: 8000,
+          disableOnInteraction: true,
+        }"
+        :creative-effect="{
+          prev: {
+            shadow: false,
+            translate: ['-20%', 0, -1],
+          },
+          next: {
+            translate: ['100%', 0, 0],
+          },
+        }"
       >
-        صاحب بار هستم
-      </NuxtLink>
-
-      <NuxtLink to="/Auth/login?type=driver"
-        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-red-600 hover:text-white hover:ring-2 hover:ring-red-600 hover:ring-offset-2 h-10 px-4 w-full bg-red-600 text-white py-3 sm:py-4 md:py-5 lg:py-6"
-      >
-        راننده هستم
-      </NuxtLink>
+        <SwiperSlide v-for="slide in 10" :key="slide">
+          <strong>{{ slide }}</strong>
+        </SwiperSlide>
+      </Swiper>
     </div>
   </div>
 </template>
-
-<script setup>
+  
+  <script setup>
 </script>
-
-<style scoped>
+  
+  <style scoped>
 .cls-1 {
   clip-path: url(#clip-Login_path);
 }

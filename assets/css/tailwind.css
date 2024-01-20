@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .navLink-active {
+    @apply text-white bg-primary  rounded-full;
+  }
+}

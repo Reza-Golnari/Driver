@@ -127,11 +127,6 @@ function focusInputRef(inputRef) {
 }
 
 function validateMobileNumber() {
-  console.log(
-    Number(
-      prefixMobile.value + middleMobile.value + suffixMobile.value
-    ).toString().length
-  );
   if (prefixMobile.value.length)
     if (!prefixMobile.value.toString().trim()[0] != "0") {
       errorMessage.value = "لطفا شماره موبایل را درست وارد کنید";

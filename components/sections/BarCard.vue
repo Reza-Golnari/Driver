@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-80 rounded-lg overflow-hidden bg-white shadow-md">
+  <div class="min-w-80 rounded-lg overflow-hidden bg-white shadow-md pb-1">
     <!-- Start of Card Header -->
     <div class="flex items-center justify-between bg-gray-300 w-full px-3 py-2">
       <NuxtLink to="/" class="flex items-center text-xs gap-x-1 text-red-600">

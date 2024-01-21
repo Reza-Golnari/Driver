@@ -6,7 +6,7 @@
       <div class="md:px-4 py-4 pb-24 w-full rounded-lg overflow-y-scroll">
         <div class="flex justify-between items-center mb-4">
           <NuxtLink
-            to="/profile"
+            to="/profile/panel"
             class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"
           >
             <img

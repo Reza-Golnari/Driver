@@ -27,7 +27,7 @@
         <div
           class="w-1/2 flex flex-col items-center justify-between gap-y-4 pt-2"
         >
-          <p class="font-bold"><span>752</span>km</p>
+          <p class="font-bold text-lg"><span>752</span>km</p>
           <img src="~/assets/icons/truck.svg" />
           <p class="font-bold md:text-3xl text-xl">14.600.000</p>
         </div>

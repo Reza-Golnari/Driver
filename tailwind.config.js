@@ -14,6 +14,7 @@ export default {
         grayBg: "#BCBCBC",
         mainBg: "#EEEEEE",
         primary: "#D60E37",
+        secondary: "#5F71DE",
       },
     },
   },

@@ -1,7 +1,9 @@
 <template>
-  <div class="relative md:w-2/3 min-h-screen rtl">
-    <div class="flex flex-col items-center justify-center">
-      <div class="md:px-4 py-4 pb-24 w-full rounded-lg">
+  <div class="relative md:w-2/3 max-h-screen rtl">
+    <div
+      class="flex flex-col items-center justify-center h-screen overflow-y-scroll"
+    >
+      <div class="md:px-4 py-4 pb-24 w-full rounded-lg overflow-y-scroll">
         <div class="flex justify-between items-center mb-4">
           <NuxtLink
             to="/profile"
@@ -56,14 +58,34 @@
             </div>
           </div>
         </div>
-        <p class="p-4 my-3 rounded-md text-xs bg-primary text-white" dir="rtl">
+        <div
+          v-if="isAuth"
+          class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
+        >
+          <p class="" dir="rtl">
+            <span>167</span>
+            بار
+          </p>
+          <p>نزدیک شماست</p>
+          <NuxtLink
+            to="/"
+            class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
+            >شروع به کار</NuxtLink
+          >
+        </div>
+        <p
+          class="p-4 my-3 rounded-md text-xs bg-primary text-white"
+          dir="rtl"
+          v-else
+        >
           پیام سیستم : احراز هویت شما در دست تایید می‌باشد!
         </p>
         <div>
           <div data-v0-t="card" class="space-y-3">
             <NuxtLink
-              to="/"
-              class="flex items-center justify-between w-full p-4 bg-gray-300 rounded-md shadow"
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/nearbyIcon.svg" class="w-10" />
@@ -74,8 +96,9 @@
               <IconsForwardArrow />
             </NuxtLink>
             <NuxtLink
-              to="/"
-              class="flex items-center justify-between w-full p-4 bg-gray-300 rounded-md shadow"
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/search-advertiesment.svg" class="w-10" />
@@ -86,8 +109,9 @@
               <IconsForwardArrow />
             </NuxtLink>
             <NuxtLink
-              to="/"
-              class="flex items-center justify-between w-full p-4 bg-gray-300 rounded-md shadow"
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/driver-history.svg" class="w-10" />
@@ -99,32 +123,34 @@
             </NuxtLink>
           </div>
         </div>
-        <div
-          class="fixed md:absolute bottom-2 left-4 right-4 bg-white py-2 shadow-md rounded-md"
-        >
-          <nav
-            class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
-          >
-            <NuxtLink to="/" class="text-black p-3">
-              <IconsHome />
-            </NuxtLink>
-            <NuxtLink to="/" class="p-3">
-              <IconsHistory />
-            </NuxtLink>
-            <NuxtLink to="/" class="navLink-active p-3">
-              <IconsLocation />
-            </NuxtLink>
-            <NuxtLink to="/" class="p-3">
-              <IconsPerson />
-            </NuxtLink>
-            <NuxtLink to="/" class="p-3">
-              <IconsHeadphone />
-            </NuxtLink>
-          </nav>
-        </div>
       </div>
+    </div>
+    <div
+      class="absolute bottom-2 left-0 md:left-4 md:right-4 right-0 bg-white py-2 shadow-md rounded-md"
+    >
+      <nav
+        class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
+      >
+        <NuxtLink to="/" class="text-black p-2 md:p-3">
+          <IconsHome />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsHistory />
+        </NuxtLink>
+        <NuxtLink to="/" class="navLink-active p-2 md:p-3">
+          <IconsLocation />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsPerson />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsHeadphone />
+        </NuxtLink>
+      </nav>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+const isAuth = ref(true);
+</script>

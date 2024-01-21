@@ -1,7 +1,7 @@
 <template>
   <SectionsBackButton />
   <div class="min-h-screen md:py-4 space-y-5 py-16">
-    <SectionsBarCard />
+    <SectionsBarCard :data="{ callBtn: false }" />
     <div>
       <div class="h-px border border-black/30" />
       <h2 class="text-center md:text-2xl text-xl font-bold mt-3 opacity-80">
@@ -37,7 +37,7 @@
           :class="[
             { 'text-black/70': !isSet },
             { 'bg-white': !isSet },
-            { 'bg-[#26c95d]': isSet },
+            { 'bg-green': isSet },
             { 'text-white': isSet },
             { 'cursor-pointer': isSet },
           ]"

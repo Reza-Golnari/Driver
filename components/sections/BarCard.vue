@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-80 rounded-lg overflow-hidden bg-white shadow-md pb-1">
+  <div class="min-w-80 rounded-lg overflow-hidden bg-white shadow-md pb-2">
     <!-- Start of Card Header -->
     <div class="flex items-center justify-between bg-gray-300 w-full px-3 py-2">
       <NuxtLink to="/" class="flex items-center text-xs gap-x-1 text-red-600">
@@ -25,8 +25,9 @@
           <p class="text-xs">استان تهران</p>
         </div>
         <div
-          class="w-1/2 flex flex-col items-center justify-between gap-y-4 md:pt-8 pt-9"
+          class="w-1/2 flex flex-col items-center justify-between gap-y-4 pt-2"
         >
+          <p class="font-bold"><span>752</span>km</p>
           <img src="~/assets/icons/truck.svg" />
           <p class="font-bold md:text-3xl text-xl">14.600.000</p>
         </div>
@@ -69,10 +70,20 @@
             <span>09135997140</span>
           </p>
         </div>
+        <button
+          v-if="isBtnShow"
+          class="block text-center mx-auto mt-2 md:w-2/3 w-5/6 md:py-3 py-2 bg-green text-white rounded-lg text-sm md:text-lg"
+        >
+          تماس با صاحب بار
+        </button>
       </div>
     </div>
     <!-- End of Card Body -->
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup>
+const props = defineProps(["data"]);
+const data = props.data;
+const isBtnShow = data.callBtn;
+</script>

@@ -7,3 +7,7 @@
     @apply text-white bg-primary  rounded-full;
   }
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

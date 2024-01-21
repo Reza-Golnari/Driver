@@ -104,7 +104,7 @@
               <img src="~/assets/icons/search-advertiesment.svg" class="w-10" />
               <div>
                 <h6 class="font-bold text-black/90">جستجوی بار</h6>
-                <p class="text-sm">بارهای اطراف خود را مشاهده کنید</p>
+                <p class="text-sm">بر اساس مبدا و مقصد بار ها را جستجو کنید</p>
               </div>
               <IconsForwardArrow />
             </NuxtLink>
@@ -117,7 +117,7 @@
               <img src="~/assets/icons/driver-history.svg" class="w-10" />
               <div>
                 <h6 class="font-bold text-black/90">تاریخچه بارهای من</h6>
-                <p class="text-sm">بارهای اطراف خود را مشاهده کنید</p>
+                <p class="text-sm">در خواست های حمل خود را اینجا ببینید</p>
               </div>
               <IconsForwardArrow />
             </NuxtLink>

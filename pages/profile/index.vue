@@ -1,82 +1,156 @@
-<script setup>
-import { useAuthStore } from "@/stores/auth";
-const authStore = useAuthStore();
-
-import { useForm } from "vee-validate";
-import * as yup from "yup";
-
-const { values, errors, defineField } = useForm({
-  validationSchema: yup.object({
-    fullName: yup.string().length(5,'نام باید حداقل 5 کارکتر باشد').required('فیلد نام را درست وارد کنید'),
-    nationalCode: yup
-      .string()
-      .matches(/^\d{10}$/, "کد ملی را درست وارد  کنید")
-      .required('کد ملی الزامی است'),
-  }),
-});
-
-const [fullName, fullNameAttrs] = defineField("fullName");
-const [nationalCode, nationalCodeAttrs] = defineField("nationalCode");
-</script>
-
 <template>
-  <div
-    class="flex w-full md:max-w-96 m-auto flex-col items-center justify-between min-h-screen bg-gray-100 py-6 px-4"
-  >
-    <div class="w-full px-2">
-      <NuxtLink to="/">
-        <nuxt-icon name="ArrowLeftFilled" filled />
-      </NuxtLink>
-    </div>
-    <div class="flex gap-4 flex-col items-between space-y-12">
-      <NuxtImg
-        src="/images/trucklogin.png"
-        alt="Truck login"
-        class="max-w-xs object-fill"
-        style="object-fit: cover"
-      />
-      <div class="gap-3 flex flex-col">
-        <div
-          class="flex flex-col gap-3 items-center justify-center bg-white py-2 px-4 rounded-lg shadow-md"
-        >
-          <input
-            class="w-full outline-none text-right py-2"
-            placeholder="نام و نام خانوادگی"
-            v-model="nationalCode"
-            v-bind="nationalCodeAttrs"
-          />
+  <div class="relative md:w-2/3 max-h-screen rtl">
+    <div
+      class="flex flex-col items-center justify-center h-screen overflow-y-scroll"
+    >
+      <div class="md:px-4 py-4 pb-24 w-full rounded-lg overflow-y-scroll">
+        <div class="flex justify-between items-center mb-4">
+          <NuxtLink
+            to="/profile"
+            class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full"
+          >
+            <img
+              class="aspect-square h-full w-full"
+              alt="Profile picture"
+              src="/images/profile.jpg"
+            />
+          </NuxtLink>
+          <div class="text-3xl flex items-center gap-x-2">
+            <NuxtLink to="/">
+              <IconsAlert />
+            </NuxtLink>
+            <NuxtLink to="/">
+              <IconsWindow />
+            </NuxtLink>
+          </div>
+        </div>
+        <div class="mb-4 space-y-2">
+          <h1 class="text-lg font-semibold text-gray-900 rtl text-right">
+            سلام مجتبی غریب رضا یزدی خوش آمدید
+          </h1>
+          <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>
+        </div>
+        <div>
+          <div class="relative">
+            <img
+              alt="Desert landscape"
+              class="w-full h-48 object-cover rounded-lg"
+              height="200"
+              src="/images/truck.png"
+              width="350"
+              style="aspect-ratio: 350 / 200; object-fit: cover"
+            />
+            <div
+              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent rounded-b-lg"
+            >
+              <h2 class="text-white font-semibold text-right">
+                اولین اکوسیستم حمل و نقلی برتر کشور !
+              </h2>
+              <p class="text-right">ما با واسطه ها میانه ای نداریم!</p>
+            </div>
+            <div
+              class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1"
+            >
+              <div class="h-2 w-2 bg-white rounded-full"></div>
+              <div class="h-2 w-2 bg-white rounded-full"></div>
+              <div class="h-2 w-2 bg-white rounded-full"></div>
+              <div class="h-2 w-2 bg-red-500 rounded-full"></div>
+            </div>
+          </div>
         </div>
         <div
-          class="flex flex-col gap-3 items-center justify-center bg-white py-2 px-4 rounded-lg shadow-md"
+          v-if="isAuth"
+          class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
         >
-          <input
-            class="w-full outline-none text-right py-2"
-            placeholder="کد ملی"
-            v-model="fullName"
-            v-bind="fullNameAttrs"
-          />
+          <p class="" dir="rtl">
+            <span>167</span>
+            بار
+          </p>
+          <p>نزدیک شماست</p>
+          <NuxtLink
+            to="/"
+            class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
+            >شروع به کار</NuxtLink
+          >
         </div>
-        <p class="mt-3 text-sm text-center text-rose-500 font-semibold">
-          error me
+        <p
+          class="p-4 my-3 rounded-md text-xs bg-primary text-white"
+          dir="rtl"
+          v-else
+        >
+          پیام سیستم : احراز هویت شما در دست تایید می‌باشد!
         </p>
-
-        <pre>values: {{ values }}</pre>
-        <pre>errors: {{ errors }}</pre>
+        <div>
+          <div data-v0-t="card" class="space-y-3">
+            <NuxtLink
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
+              dir="rtl"
+            >
+              <img src="~/assets/icons/nearbyIcon.svg" class="w-10" />
+              <div>
+                <h6 class="font-bold text-black/90">اطراف من</h6>
+                <p class="text-sm">بارهای اطراف خود را مشاهده کنید</p>
+              </div>
+              <IconsForwardArrow />
+            </NuxtLink>
+            <NuxtLink
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
+              dir="rtl"
+            >
+              <img src="~/assets/icons/search-advertiesment.svg" class="w-10" />
+              <div>
+                <h6 class="font-bold text-black/90">جستجوی بار</h6>
+                <p class="text-sm">بر اساس مبدا و مقصد بار ها را جستجو کنید</p>
+              </div>
+              <IconsForwardArrow />
+            </NuxtLink>
+            <NuxtLink
+              :to="isAuth ? '/' : ''"
+              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :class="{ 'bg-gray-300': !isAuth }"
+              dir="rtl"
+            >
+              <img src="~/assets/icons/driver-history.svg" class="w-10" />
+              <div>
+                <h6 class="font-bold text-black/90">تاریخچه بارهای من</h6>
+                <p class="text-sm">در خواست های حمل خود را اینجا ببینید</p>
+              </div>
+              <IconsForwardArrow />
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="w-full px-4 py-2 h-24">
-      <button
-        ref="loginButtonRef"
-        @click="login"
-        class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 w-full bg-gray-300 text-black"
+    <div
+      class="absolute bottom-2 left-0 md:left-4 md:right-4 right-0 bg-white py-2 shadow-md rounded-md"
+    >
+      <nav
+        class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
       >
-        ادامه
-      </button>
+        <NuxtLink to="/" class="text-black p-2 md:p-3">
+          <IconsHome />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsHistory />
+        </NuxtLink>
+        <NuxtLink to="/" class="navLink-active p-2 md:p-3">
+          <IconsLocation />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsPerson />
+        </NuxtLink>
+        <NuxtLink to="/" class="p-2 md:p-3">
+          <IconsHeadphone />
+        </NuxtLink>
+      </nav>
     </div>
   </div>
 </template>
 
-
-
-<style scoped>
-</style>
+<script setup>
+const isAuth = ref(true);
+</script>

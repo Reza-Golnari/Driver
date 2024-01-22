@@ -17,7 +17,7 @@
                 <input
                   @keyup="(e) => focusNext(e, inputTwo)"
                   ref="inputOne"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green-500 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
                   type="text"
                   pattern="[0-9]"
                   v-model="one"
@@ -28,7 +28,7 @@
                 <input
                   @keyup="(e) => focusNext(e, inputThree)"
                   ref="inputTwo"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green-500 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
                   type="text"
                   v-model="two"
                   pattern="[0-9]"
@@ -39,7 +39,7 @@
                 <input
                   @keyup="(e) => focusNext(e, inputFour)"
                   ref="inputThree"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green-500 border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
                   type="text"
                   v-model="three"
                   pattern="[0-9]"
@@ -50,7 +50,7 @@
                 <input
                   @keyup="(e) => focusNext(e, buttonConfirm)"
                   ref="inputFour"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green-500 border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
                   type="text"
                   v-model="four"
                   size="1"

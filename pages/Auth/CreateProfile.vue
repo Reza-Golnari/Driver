@@ -1,5 +1,6 @@
 <template>
   <div class="h-screen p-2 flex items-center justify-center min-w-72">
+    <SectionsBackButton />
     <div class="text-center">
       <div
         class="w-48 h-48 mx-auto p-12 rounded-full flex items-center justify-center bg-primary cursor-pointer mb-2 shadow-md"
@@ -42,7 +43,7 @@
 const userNameInput = ref();
 const userCodeInput = ref();
 const errorMsg = ref();
-const isError = ref(false);
+const isError = ref(true);
 const userName = ref("");
 const userCode = ref("");
 
@@ -51,19 +52,14 @@ watch([userName, userCode], () => {
 });
 
 function validateForm() {
-  console.log(true);
   if (userName.value.trim().length < 8) {
-    isError.value = true;
     errorMsg.value.textContent =
       "نام و نام خانوادگی نمی‌تواند کمتر از 8 حرف باشد";
   } else if (userName.value.trim().split(" ").length < 2) {
-    isError.value = true;
     errorMsg.value.textContent = "نام و نام خانوادگی صحیح نیست";
   } else if (userCode.value.trim().length <= 10) {
-    isError.value = true;
     errorMsg.value.textContent = "کد ملی نمی‌تواند کمتر از 10 حرف باشد";
   } else if (isNaN(userCode.value.trim())) {
-    isError.value = true;
     errorMsg.value.textContent = "کد ملی می‌تواند تنها شامل اعداد باشد";
   } else {
     errorMsg.value.textContent = "";

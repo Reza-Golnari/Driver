@@ -153,7 +153,7 @@
         <NuxtLink to="/profile/history" class="p-2 md:p-3">
           <IconsHistory />
         </NuxtLink>
-        <NuxtLink to="/profile/location" class="p-2 md:p-3">
+        <NuxtLink to="/profile/location" class="navLink-active p-2 md:p-3">
           <IconsLocation />
         </NuxtLink>
         <NuxtLink to="/profile/panel" class="p-2 md:p-3">

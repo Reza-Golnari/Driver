@@ -1,6 +1,16 @@
 <template>
   <div class="relative md:w-2/3 max-h-screen rtl">
     <div
+      class="fixed top-0 left-0 w-screen h-screen bg-black/30 z-10"
+      v-if="showMenu"
+      @click="showMenu = false"
+    />
+    <KeepAlive>
+      <transition name="menu">
+        <SectionsMenu v-if="showMenu" />
+      </transition>
+    </KeepAlive>
+    <div
       class="flex flex-col items-center justify-center h-screen overflow-y-scroll"
     >
       <div class="md:px-4 py-4 pb-24 w-full rounded-lg overflow-y-scroll">
@@ -19,7 +29,7 @@
             <NuxtLink to="/">
               <IconsAlert />
             </NuxtLink>
-            <NuxtLink to="/">
+            <NuxtLink class="cursor-pointer" @click="showMenu = true">
               <IconsWindow />
             </NuxtLink>
           </div>
@@ -84,40 +94,46 @@
           <div data-v0-t="card" class="space-y-3">
             <NuxtLink
               :to="isAuth ? '/' : ''"
-              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
               :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/nearbyIcon.svg" class="w-10" />
-              <div>
+              <div class="w-3/4">
                 <h6 class="font-bold text-black/90">اطراف من</h6>
-                <p class="text-sm">بارهای اطراف خود را مشاهده کنید</p>
+                <p class="md:text-sm text-xs">
+                  بارهای اطراف خود را مشاهده کنید
+                </p>
               </div>
               <IconsForwardArrow />
             </NuxtLink>
             <NuxtLink
               :to="isAuth ? '/' : ''"
-              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
               :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/search-advertiesment.svg" class="w-10" />
-              <div>
+              <div class="w-3/4">
                 <h6 class="font-bold text-black/90">جستجوی بار</h6>
-                <p class="text-sm">بر اساس مبدا و مقصد بار ها را جستجو کنید</p>
+                <p class="md:text-sm text-xs">
+                  بر اساس مبدا و مقصد بار ها را جستجو کنید
+                </p>
               </div>
               <IconsForwardArrow />
             </NuxtLink>
             <NuxtLink
-              :to="isAuth ? '/' : ''"
-              class="flex items-center justify-between w-full p-4 bg-white rounded-md shadow"
+              :to="isAuth ? '/profile/history' : ''"
+              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
               :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
               <img src="~/assets/icons/driver-history.svg" class="w-10" />
-              <div>
+              <div class="w-3/4">
                 <h6 class="font-bold text-black/90">تاریخچه بارهای من</h6>
-                <p class="text-sm">در خواست های حمل خود را اینجا ببینید</p>
+                <p class="md:text-sm text-xs">
+                  در خواست های حمل خود را اینجا ببینید
+                </p>
               </div>
               <IconsForwardArrow />
             </NuxtLink>
@@ -131,19 +147,19 @@
       <nav
         class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
       >
-        <NuxtLink to="/" class="text-black p-2 md:p-3">
+        <NuxtLink to="/profile" class="text-black p-2 md:p-3">
           <IconsHome />
         </NuxtLink>
-        <NuxtLink to="/" class="p-2 md:p-3">
+        <NuxtLink to="/profile/history" class="p-2 md:p-3">
           <IconsHistory />
         </NuxtLink>
-        <NuxtLink to="/" class="navLink-active p-2 md:p-3">
+        <NuxtLink to="/profile/location" class="p-2 md:p-3">
           <IconsLocation />
         </NuxtLink>
-        <NuxtLink to="/" class="p-2 md:p-3">
+        <NuxtLink to="/profile/panel" class="p-2 md:p-3">
           <IconsPerson />
         </NuxtLink>
-        <NuxtLink to="/" class="p-2 md:p-3">
+        <NuxtLink to="/team" class="p-2 md:p-3">
           <IconsHeadphone />
         </NuxtLink>
       </nav>
@@ -152,5 +168,23 @@
 </template>
 
 <script setup>
+const showMenu = ref(false);
 const isAuth = ref(true);
 </script>
+
+<style scoped>
+.menu-enter-active,
+.menu-leave-active {
+  transition: opacity 0.2s, right 0.2s;
+}
+.menu-enter-from,
+.menu-leave-to {
+  opacity: 0;
+  right: -100vw;
+}
+.menu-enter-to,
+.menu-leave-from {
+  opacity: 1;
+  right: 0;
+}
+</style>

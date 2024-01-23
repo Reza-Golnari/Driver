@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import Cookie from "js-cookie";
 
 export const useAuthStore = defineStore("auth", {
   state: () => {
@@ -16,6 +17,12 @@ export const useAuthStore = defineStore("auth", {
       this.loginData = { ...loginObject };
     },
 
-    logout(item) {},
+    saveUserData(data) {
+      this.user = data;
+    },
+
+    logout() {
+      Cookie.remove("token");
+    },
   },
 });

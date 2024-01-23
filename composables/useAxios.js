@@ -8,25 +8,23 @@ export default function useAxios() {
 
   const headers = {
     "Content-Type": "application/json",
+    Accept: "application/vnd.api+json",
   };
 
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  async function sendRequest({ method, url, body }) {
+  async function sendRequest({ method, url, data }) {
     try {
-      axios({
+      const response = await axios({
         method,
         url: BASEURL + url,
-        body,
-      })
-        .then((res) => {
-          return res.data;
-        })
-        .catch((err) => {
-          throw err;
-        });
+        data,
+        headers,
+      });
+      return response.data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      throw err;
     }
   }
 

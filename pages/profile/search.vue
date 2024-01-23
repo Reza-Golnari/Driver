@@ -4,10 +4,10 @@
     <h2 class="text-end md:text-center md:text-3xl text-xl font-bold mb-5">
       جستجوی بار
     </h2>
-    <div class="mx-auto my-10">
+    <div class="mx-auto my-10 w-3/4 md:w-full">
       <img src="/images/searchCargo.webp" />
     </div>
-    <div class="space-y-24 relative">
+    <div class="space-y-16 md:space-y-24 relative">
       <div class="relative flex flex-row-reverse items-center gap-x-6 z-50">
         <div class="bg-white p-3 rounded-xl">
           <IconsCircle class="text-primary text-3xl" />

@@ -13,6 +13,7 @@
             >
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
+                  @input="checkToken"
                   @keyup="(e) => focusNext(e, inputTwo)"
                   ref="inputOne"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
@@ -24,6 +25,7 @@
               </div>
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
+                  @input="checkToken"
                   @keyup="(e) => focusNext(e, inputThree)"
                   ref="inputTwo"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
@@ -35,6 +37,7 @@
               </div>
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
+                  @input="checkToken"
                   @keyup="(e) => focusNext(e, inputFour)"
                   ref="inputThree"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
@@ -46,7 +49,7 @@
               </div>
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
-                  @keyup="(e) => focusNext(e, buttonConfirm)"
+                  @input="checkToken"
                   ref="inputFour"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
                   type="text"
@@ -79,19 +82,16 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth";
+import axios from "axios";
 import useAxios from "~/composables/useAxios";
 
 const { sendRequest } = useAxios();
-const runtimeConfig = useRuntimeConfig();
 const authStore = useAuthStore();
-
-const route = useRoute();
 
 const inputOne = ref(null);
 const inputTwo = ref(null);
 const inputThree = ref(null);
 const inputFour = ref(null);
-const buttonConfirm = ref(null);
 
 function focusNext(e, inputRef) {
   if (e.target.value.length > 0) {
@@ -99,20 +99,29 @@ function focusNext(e, inputRef) {
   }
 }
 
-const one = useInputCode();
-const two = useInputCode();
-const three = useInputCode();
-const four = useInputCode();
+const one = ref();
+const two = ref();
+const three = ref();
+const four = ref();
 
-// send code for user
+function checkToken() {
+  nextTick(() => {
+    if (one.value && two.value && three.value && four.value) {
+    }
+  });
+}
+
 async function sendCode() {
   try {
-    const response = await sendRequest({
+    const res = await sendRequest({
       method: "POST",
       url: "/otp/send-otp",
-      body: { model: route.query.type, mobile: authStore.loginData.mobile },
+      data: {
+        model: authStore.type,
+        mobile: "09137180158",
+      },
     });
-    console.log(response);
+    console.log(res);
   } catch (error) {
     console.log(error);
   }

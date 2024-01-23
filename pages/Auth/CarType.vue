@@ -169,7 +169,7 @@ function submit() {
     carInfo: carInfoInput.value,
     carNumber: carNumberInput.value,
   });
-  navigateTo("/profile");
+  navigateTo("/auth/verify");
 }
 </script>
 

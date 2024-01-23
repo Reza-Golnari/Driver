@@ -26,7 +26,7 @@
       </li>
       <li>
         <NuxtLink
-          to="/"
+          to="/profile/search"
           class="flex items-center justify-end gap-x-3 font-bold"
         >
           جستوجوی بار

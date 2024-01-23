@@ -8,6 +8,7 @@ export default function useAxios() {
 
   const headers = {
     "Content-Type": "application/json",
+    Accept: "application/vnd.api+json",
   };
 
   if (token) headers.Authorization = `Bearer ${token}`;

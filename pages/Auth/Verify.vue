@@ -82,7 +82,7 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth";
-import axios from "axios";
+import Cookie from "js-cookie";
 import useAxios from "~/composables/useAxios";
 
 const { sendRequest } = useAxios();
@@ -104,9 +104,23 @@ const two = ref();
 const three = ref();
 const four = ref();
 
-function checkToken() {
-  nextTick(() => {
+async function checkToken() {
+  nextTick(async () => {
     if (one.value && two.value && three.value && four.value) {
+      const token = one.value + two.value + three.value + four.value;
+      const res = await sendRequest({
+        method: "POST",
+        url: "/otp/verify-otp",
+        data: {
+          model: authStore.loginData.type,
+          mobile: authStore.loginData.mobile,
+          token,
+        },
+      });
+      console.log(res);
+      if (res.token) {
+        Cookie.set("token", res.token, { expires: 30, path: "/" });
+      }
     }
   });
 }
@@ -117,8 +131,8 @@ async function sendCode() {
       method: "POST",
       url: "/otp/send-otp",
       data: {
-        model: authStore.type,
-        mobile: "09137180158",
+        model: authStore.loginData.type,
+        mobile: authStore.loginData.mobile,
       },
     });
     console.log(res);

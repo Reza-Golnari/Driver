@@ -13,13 +13,16 @@ export default function useAxios() {
 
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  async function sendRequest({ method, url, data }) {
+  async function sendRequest({ method, url, data, newHeader }) {
     try {
       const response = await axios({
         method,
         url: BASEURL + url,
         data,
-        headers,
+        headers: {
+          ...headers,
+          ...newHeader,
+        },
       });
       return response.data;
     } catch (err) {

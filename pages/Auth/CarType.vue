@@ -36,7 +36,7 @@
           @click="openSubMenu('isDrop2Open')"
         >
           <IconsDownArrow class="text-lg" />
-          <span ref="carInfoInput"> انتخاب نوع ماشین</span>
+          <span ref="carInfoInput"> انتخاب </span>
         </div>
         <ul
           class="absolute top-10 z-40 w-full bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2"
@@ -62,7 +62,7 @@
           @click="openSubMenu('isDrop3Open')"
         >
           <IconsDownArrow class="text-lg" />
-          <span ref="carNumberInput"> انتخاب نوع ماشین</span>
+          <span ref="carNumberInput"> انتخاب </span>
         </div>
         <ul
           class="absolute top-10 z-30 w-full bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2"
@@ -169,7 +169,7 @@ function submit() {
     carInfo: carInfoInput.value,
     carNumber: carNumberInput.value,
   });
-  navigateTo("/auth/verify");
+  navigateTo("/profile");
 }
 </script>
 

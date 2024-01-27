@@ -98,7 +98,7 @@
               :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"
             >
-              <img src="~/assets/icons/nearbyIcon.svg" class="w-10" />
+              <img src="~/assets/icons/nearby-icon.svg" class="w-10" />
               <div class="w-3/4">
                 <h6 class="font-bold text-black/90">اطراف من</h6>
                 <p class="md:text-sm text-xs">

@@ -21,7 +21,7 @@
           class="flex items-center justify-end gap-x-3 font-bold"
         >
           اطراف من
-          <img class="w-8 md:w-10" src="~/assets/icons/nearbyicon.svg" />
+          <img class="w-8 md:w-10" src="~/assets/icons/nearby-icon.svg" />
         </NuxtLink>
       </li>
       <li>

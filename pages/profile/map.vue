@@ -1,20 +1,130 @@
 <template>
-  <div
-    class="w-full md:max-w-[500px] flex flex-col items-center justify-between h-screen py-4"
-  >
-    <SectionsBackButton />
-    <NeshanMap
-      :mapKey="mapKey"
-      :serviceKey="serviceKey"
-      :scale="0.5"
-      class="w-10/12 border h-72"
-    />
-    <div></div>
-    <SectionsBarCard :data="{ callBtn: false }" />
-  </div>
+  <ClientOnly>
+    <div
+      class="w-full md:max-w-[500px] flex flex-col items-center justify-between py-4"
+    >
+      <SectionsBackButton />
+      <NeshanMap
+        mapSetting="false"
+        mapKey="web.6ec8e70dc16b441ab69604328db2df28"
+        serviceKey="service.90f18a9ef8ab47d0a983042d07f49e64"
+        mapType="dreamy"
+        :center="{ latitude: 35.69672648316882, longitude: 51.36281969540723 }"
+        :scale="0.5"
+        poi="false"
+        class="w-full h-72 shadow-md rounded-md"
+      />
+
+      <div class="w-5/6 my-5 space-y-3">
+        <div
+          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer z-50"
+          @click="openMenu('menu1')"
+        >
+          <div class="flex items-center gap-x-2 flex-row-reverse">
+            <IconsCircle class="text-primary text-2xl" />
+            <p class="text-black/70" ref="originTitle">یزد</p>
+          </div>
+          <IconsDownArrow class="text-primary text-lg" />
+          <ul
+            class="absolute w-full left-0 top-12 bg-primary divide-y rounded-b-lg text-white text-end overflow-scroll"
+            :class="[
+              { invisible: !isMenu1Open },
+              { 'h-0': !isMenu1Open },
+              { 'h-36': isMenu1Open },
+            ]"
+          >
+            <li
+              v-for="(city, index) in cities"
+              :key="index"
+              class="p-2"
+              @click="setOrigin(city)"
+            >
+              {{ city.title }}
+            </li>
+          </ul>
+        </div>
+        <div
+          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer z-40"
+          @click="openMenu('menu2')"
+        >
+          <div class="flex items-center gap-x-2 flex-row-reverse">
+            <IconsLocation class="text-primary text-2xl" />
+            <p class="text-black/70" ref="destTitle">تهران</p>
+          </div>
+          <IconsDownArrow class="text-primary text-lg" />
+          <ul
+            class="absolute w-full left-0 top-12 bg-primary divide-y rounded-b-lg text-white text-end overflow-scroll"
+            :class="[
+              { invisible: !isMenu2Open },
+              { 'h-0': !isMenu2Open },
+              { 'h-36': isMenu2Open },
+            ]"
+          >
+            <li
+              v-for="(city, index) in cities"
+              :key="index"
+              class="p-2"
+              @click="setDest(city)"
+            >
+              {{ city.title }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <SectionsBarCard :data="{ callBtn: true }" />
+    </div>
+  </ClientOnly>
 </template>
 <script setup>
-const mapKey = process.env.MAP_KEY;
-const serviceKey = process.env.SERVICE_KEY;
 import NeshanMap from "@neshan-maps-platform/vue3-openlayers";
+
+const isMenu1Open = ref(false);
+const isMenu2Open = ref(false);
+const originTitle = ref();
+const destTitle = ref();
+
+const cities = ref([
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "مشهد", subtitle: "استان مشهد" },
+  { title: "یزد", subtitle: "استان یزد" },
+  { title: "تهران", subtitle: "استان تهران" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+  { title: "اصفهان", subtitle: "استان اصفهان" },
+]);
+
+function openMenu(menu) {
+  if (menu === "menu1") {
+    isMenu1Open.value = !isMenu1Open.value;
+    isMenu2Open.value = false;
+    return;
+  }
+  isMenu2Open.value = !isMenu2Open.value;
+  isMenu1Open.value = false;
+}
+
+function setOrigin(data) {
+  originTitle.value.textContent = data.title;
+}
+function setDest(data) {
+  destTitle.value.textContent = data.title;
+}
 </script>
+
+<style>
+.map-settings,
+.map-search-box,
+.map-drawer--desktop,
+.map-drawer,
+.map a {
+  display: none !important;
+}
+
+ul {
+  transition: height 0.2s, visibility 0.2s;
+}
+</style>

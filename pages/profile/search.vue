@@ -14,7 +14,7 @@
         </div>
         <div
           class="relative text-end border-b w-3/4 border-black/30 pb-1 cursor-pointer"
-          @click="isMenu1Open = !isMenu1Open"
+          @click="openMenu('menu1')"
         >
           <h5 class="text-xl font-bold" ref="originTitle">میبد</h5>
           <p class="text-sm" ref="originSubtitle">استان یزد</p>
@@ -31,7 +31,10 @@
             </li>
           </ul>
         </div>
-        <div class="absolute left-0">
+        <div
+          class="absolute left-0 cursor-pointer"
+          @click="isMenu1Open = !isMenu1Open"
+        >
           <IconsBackFlash class="-rotate-90 text-primary text-xl" />
         </div>
       </div>
@@ -50,7 +53,7 @@
         </div>
         <div
           class="relative text-end border-b w-3/4 border-black/30 pb-1 cursor-pointer"
-          @click="isMenu2Open = !isMenu2Open"
+          @click="openMenu('menu2')"
         >
           <h5 class="text-xl font-bold" ref="destTitle">تهران</h5>
           <p class="text-sm" ref="destSubtitle">استان تهران</p>
@@ -71,7 +74,10 @@
             </li>
           </ul>
         </div>
-        <div class="absolute left-0">
+        <div
+          class="absolute left-0 cursor-pointer"
+          @click="isMenu1Open = !isMenu1Open"
+        >
           <IconsBackFlash class="-rotate-90 text-primary text-xl" />
         </div>
       </div>
@@ -126,11 +132,21 @@ function change() {
   destSubtitle.value.textContent = oldOriginSubTitle;
 }
 
+function openMenu(menu) {
+  if (menu === "menu1") {
+    isMenu1Open.value = !isMenu1Open.value;
+    isMenu2Open.value = false;
+    return;
+  }
+  isMenu2Open.value = !isMenu2Open.value;
+  isMenu1Open.value = false;
+}
+
 function search() {}
 </script>
 
 <style scoped>
 ul {
-  transition: height 0.2s;
+  transition: height 0.2s, visibility 0.2s;
 }
 </style>

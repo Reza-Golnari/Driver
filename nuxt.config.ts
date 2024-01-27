@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   modules: [
     "@nuxtjs/tailwindcss",
     "@pinia/nuxt",
@@ -39,5 +40,6 @@ export default defineNuxtConfig({
     "~/assets/css/font.css",
     "~/assets/css/global.css",
     "~/assets/css/tailwind.css",
+    "@neshan-maps-platform/mapbox-gl-vue/dist/style.css",
   ],
 });

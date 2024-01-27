@@ -20,6 +20,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@neshan-maps-platform/mapbox-gl-vue": "^1.0.0",
+    "@neshan-maps-platform/vue3-openlayers": "^2.0.1",
     "@nuxt/image": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/nuxt": "^4.12.4",
@@ -29,7 +31,9 @@
     "js-cookie": "^3.0.5",
     "nuxt-icons": "^3.2.1",
     "nuxt-swiper": "^1.2.2",
+    "ol": "^8.2.0",
     "pinia": "^2.1.7",
+    "vuejs-neshan-map-leaflet": "^1.1.7",
     "yup": "^1.3.3"
   }
 }

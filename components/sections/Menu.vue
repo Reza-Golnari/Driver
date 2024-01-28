@@ -85,6 +85,7 @@
         <NuxtLink
           to="/"
           class="flex items-center justify-end gap-x-3 font-bold text-red-600"
+          @click="logout"
         >
           خروج از حساب
           <IconsLogout class="md:text-[40px] text-[32px] opacity-80" />
@@ -93,3 +94,17 @@
     </ul>
   </nav>
 </template>
+
+<script setup>
+import Cookie from "js-cookie";
+import useAxios from "~/composables/useAxios";
+const { sendRequest } = useAxios();
+
+async function logout() {
+  await sendRequest({
+    method: "GET",
+    url: "/panel/logout",
+  });
+  Cookie.remove("token");
+}
+</script>

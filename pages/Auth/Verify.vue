@@ -118,7 +118,6 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      console.log(res);
       if (res.token) {
         Cookie.set("token", res.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
@@ -138,10 +137,7 @@ async function sendCode() {
       },
       newHeader: {},
     });
-    console.log(res);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 
 onMounted(() => {

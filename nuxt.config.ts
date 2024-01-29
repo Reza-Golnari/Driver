@@ -41,4 +41,9 @@ export default defineNuxtConfig({
     "~/assets/css/tailwind.css",
     "@neshan-maps-platform/mapbox-gl-vue/dist/style.css",
   ],
+  app: {
+    head: {
+      link: [{ rel: "icon", href: "/images/ICO 192-01.png" }],
+    },
+  },
 });

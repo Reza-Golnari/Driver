@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
     "nuxt-swiper",
     "@nuxt/image",
-    "@vite-pwa/nuxt",
   ],
   runtimeConfig: {
     public: {
@@ -36,38 +35,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  pwa: {
-    manifest: {
-      name: "آرام بار",
-      short_name: "آرام بار",
-      description: "حمل بارهای شما",
-      display: "standalone",
-      start_url: "/",
-      theme_color: "#ffffff",
-      background_color: "#ffffff",
-      icons: [
-        {
-          src: "/images/icon-512.png",
-          sizes: "512x512",
-          type: "image/png",
-          purpose: "any maskable",
-        },
-        {
-          src: "/images/icon-192.png",
-          sizes: "192x192",
-          type: "image/png",
-          purpose: "any maskable",
-        },
-      ],
-    },
-    workbox: {
-      globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-    },
-    devOptions: {
-      enabled: true,
-      type: "module",
-    },
-  },
   css: [
     "~/assets/css/font.css",
     "~/assets/css/global.css",
@@ -76,7 +43,10 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      link: [{ rel: "icon", href: "/images/icon-192.png" }],
+      link: [
+        { rel: "icon", href: "/images/icon-192.png" },
+        { rel: "manifest", href: "/manifest.json" },
+      ],
     },
   },
 });

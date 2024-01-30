@@ -1,0 +1,23 @@
+{
+  "name": "آرام بار",
+  "short_name": "آرام بار",
+  "description": "حمل بارهای شما",
+  "display": "standalone",
+  "start_url": ".",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

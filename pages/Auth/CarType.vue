@@ -191,6 +191,9 @@ function submit() {
 </script>
 
 <style scoped>
+.invisible {
+  transition: visibility 0.1s 0.1s;
+}
 .drop1 {
   transition: bottom 0.3s;
 }

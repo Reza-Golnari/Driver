@@ -160,7 +160,9 @@ function openMenu(menu) {
   isMenu1Open.value = false;
 }
 
-function search() {}
+function search() {
+  navigateTo("/profile/map");
+}
 </script>
 
 <style scoped>

@@ -1,10 +1,12 @@
 <template>
-  <div class="h-screen min-w-80 flex flex-col items-center py-24 gap-y-4">
-    <!-- Back Button -->
-    <SectionsBackButton />
+  <!-- Back Button -->
+  <SectionsBackButton />
+  <div
+    class="h-screen relative min-w-80 flex flex-col items-center py-24 gap-y-4"
+  >
     <img src="/images/car-type.png" />
     <div class="w-full space-y-3">
-      <div class="relative">
+      <div>
         <div
           class="bg-primary text-white w-full mx-auto flex items-center justify-between py-4 px-8 rounded-lg cursor-pointer"
           @click="openSubMenu('isDrop1Open')"
@@ -12,23 +14,28 @@
           <IconsDownArrow class="text-lg" />
           <span ref="mainCarTypeInput"> انتخاب نوع ماشین</span>
         </div>
-        <ul
-          class="absolute top-10 z-50 w-full bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2"
-          :class="[
-            { 'h-52': isDrop1Open },
-            { 'h-0': !isDrop1Open },
-            { invisible: !isDrop1Open },
-          ]"
+        <div
+          class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+          :class="[{ invisible: !isDrop1Open }]"
+          @click="isDrop1Open = false"
         >
-          <li
-            class="py-2 px-3 pt-3 cursor-pointer"
-            @click="setCarInformation($event, 'isDrop1Open')"
-            v-for="(item, index) in mainCarTypeList"
-            :key="index"
+          <ul
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            :class="[
+              { '-bottom-0': isDrop1Open },
+              { '-bottom-full': !isDrop1Open },
+            ]"
           >
-            تریلی
-          </li>
-        </ul>
+            <li
+              class="py-2 px-3 pt-3 cursor-pointer"
+              @click="setCarInformation($event, 'isDrop1Open')"
+              v-for="(item, index) in mainCarTypeList"
+              :key="index"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="relative" v-show="isSelected">
         <div
@@ -38,23 +45,28 @@
           <IconsDownArrow class="text-lg" />
           <span ref="carInfoInput"> انتخاب </span>
         </div>
-        <ul
-          class="absolute top-10 z-40 w-full bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2"
-          :class="[
-            { 'h-52': isDrop2Open },
-            { 'h-0': !isDrop2Open },
-            { invisible: !isDrop2Open },
-          ]"
+        <div
+          class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+          :class="[{ invisible: !isDrop2Open }]"
+          @click="isDrop2Open = false"
         >
-          <li
-            class="py-2 px-3 pt-3 cursor-pointer"
-            @click="setCarInformation($event, 'isDrop2Open')"
-            v-for="(item, index) in mainCarTypeList"
-            :key="index"
+          <ul
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            :class="[
+              { '-bottom-0': isDrop2Open },
+              { '-bottom-full': !isDrop2Open },
+            ]"
           >
-            تریلی
-          </li>
-        </ul>
+            <li
+              class="py-2 px-3 pt-3 cursor-pointer"
+              @click="setCarInformation($event, 'isDrop2Open')"
+              v-for="(item, index) in mainCarTypeList"
+              :key="index"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="relative" v-show="isSelected">
         <div
@@ -64,23 +76,28 @@
           <IconsDownArrow class="text-lg" />
           <span ref="carNumberInput"> انتخاب </span>
         </div>
-        <ul
-          class="absolute top-10 z-30 w-full bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2"
-          :class="[
-            { 'h-52': isDrop3Open },
-            { 'h-0': !isDrop3Open },
-            { invisible: !isDrop3Open },
-          ]"
+        <div
+          class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+          :class="[{ invisible: !isDrop3Open }]"
+          @click="isDrop3Open = false"
         >
-          <li
-            class="py-2 px-3 pt-3 cursor-pointer"
-            @click="setCarInformation($event, 'isDrop3Open')"
-            v-for="(item, index) in mainCarTypeList"
-            :key="index"
+          <ul
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            :class="[
+              { '-bottom-0': isDrop3Open },
+              { '-bottom-full': !isDrop3Open },
+            ]"
           >
-            تریلی
-          </li>
-        </ul>
+            <li
+              class="py-2 px-3 pt-3 cursor-pointer"
+              @click="setCarInformation($event, 'isDrop3Open')"
+              v-for="(item, index) in mainCarTypeList"
+              :key="index"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
       </div>
       <button
         v-show="isSelected"
@@ -174,7 +191,10 @@ function submit() {
 </script>
 
 <style scoped>
+.invisible {
+  transition: visibility 0.1s 0.1s;
+}
 .drop1 {
-  transition: height 0.2s;
+  transition: bottom 0.3s;
 }
 </style>

@@ -8,7 +8,7 @@
       <img src="/images/searchCargo.webp" />
     </div>
     <div class="space-y-16 md:space-y-24 relative">
-      <div class="relative flex flex-row-reverse items-center gap-x-6 z-50">
+      <div class="relative flex flex-row-reverse items-center gap-x-6">
         <div class="bg-white p-3 rounded-xl">
           <IconsCircle class="text-primary text-3xl" />
         </div>
@@ -18,18 +18,28 @@
         >
           <h5 class="text-xl font-bold" ref="originTitle">میبد</h5>
           <p class="text-sm" ref="originSubtitle">استان یزد</p>
-          <ul
-            class="absolute w-full bg-primary rounded-b-xl text-white divide-y z-40 overflow-scroll"
-            :class="[
-              { 'h-0': !isMenu1Open },
-              { invisible: !isMenu1Open },
-              { 'h-64': isMenu1Open },
-            ]"
+          <div
+            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+            :class="[{ invisible: !isMenu1Open }]"
+            @click="isMenu1Open = true"
           >
-            <li v-for="city in cities" @click="setOrigin(city)" class="p-2">
-              {{ city.title }}
-            </li>
-          </ul>
+            <ul
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              :class="[
+                { '-bottom-0': isMenu1Open },
+                { '-bottom-full': !isMenu1Open },
+              ]"
+            >
+              <li
+                v-for="(city, index) in cities"
+                :key="index"
+                @click="setOrigin(city)"
+                class="p-2"
+              >
+                {{ city.title }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div
           class="absolute left-0 cursor-pointer"
@@ -47,7 +57,7 @@
       <div
         class="absolute -top-10 right-[26px] w-px h-1/3 border border-dashed border-primary"
       />
-      <div class="relative flex flex-row-reverse items-center gap-x-6 z-40">
+      <div class="relative flex flex-row-reverse items-center gap-x-6">
         <div class="bg-white p-3 rounded-xl">
           <IconsLocation class="text-primary text-3xl" />
         </div>
@@ -57,26 +67,32 @@
         >
           <h5 class="text-xl font-bold" ref="destTitle">تهران</h5>
           <p class="text-sm" ref="destSubtitle">استان تهران</p>
-          <ul
-            class="absolute w-full bg-primary rounded-b-xl text-white divide-y z-30 overflow-scroll"
-            :class="[
-              { 'h-0': !isMenu2Open },
-              { invisible: !isMenu2Open },
-              { 'h-64': isMenu2Open },
-            ]"
+          <div
+            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+            :class="[{ invisible: !isMenu2Open }]"
+            @click="isMenu2Open = true"
           >
-            <li
-              v-for="city in cities"
-              @click="setDestination(city)"
-              class="p-2"
+            <ul
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              :class="[
+                { '-bottom-0': isMenu2Open },
+                { '-bottom-full': !isMenu2Open },
+              ]"
             >
-              {{ city.title }}
-            </li>
-          </ul>
+              <li
+                v-for="(city, index) in cities"
+                :key="index"
+                @click="setDestination(city)"
+                class="p-2"
+              >
+                {{ city.title }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div
           class="absolute left-0 cursor-pointer"
-          @click="isMenu1Open = !isMenu1Open"
+          @click="isMenu2Open = !isMenu2Open"
         >
           <IconsBackFlash class="-rotate-90 text-primary text-xl" />
         </div>
@@ -115,11 +131,13 @@ const cities = ref([
 function setOrigin(data) {
   originTitle.value.textContent = data.title;
   originSubtitle.value.textContent = data.subtitle;
+  isMenu1Open.value = false;
 }
 
 function setDestination(data) {
   destTitle.value.textContent = data.title;
   destSubtitle.value.textContent = data.subtitle;
+  isMenu2Open.value = false;
 }
 
 function change() {
@@ -142,11 +160,17 @@ function openMenu(menu) {
   isMenu1Open.value = false;
 }
 
-function search() {}
+function search() {
+  navigateTo("/profile/map");
+}
 </script>
 
 <style scoped>
+.invisible {
+  transition: visibility 0.1s 0.1s;
+}
+
 ul {
-  transition: height 0.2s, visibility 0.2s;
+  transition: bottom 0.3s;
 }
 </style>

@@ -17,7 +17,7 @@
 
       <div class="w-5/6 my-5 space-y-3">
         <div
-          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer z-50"
+          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer"
           @click="openMenu('menu1')"
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
@@ -25,26 +25,31 @@
             <p class="text-black/70" ref="originTitle">یزد</p>
           </div>
           <IconsDownArrow class="text-primary text-lg" />
-          <ul
-            class="absolute w-full left-0 top-12 bg-primary divide-y rounded-b-lg text-white text-end overflow-scroll"
-            :class="[
-              { invisible: !isMenu1Open },
-              { 'h-0': !isMenu1Open },
-              { 'h-36': isMenu1Open },
-            ]"
+          <div
+            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+            :class="[{ invisible: !isMenu1Open }]"
+            @click="isMenu1Open = true"
           >
-            <li
-              v-for="(city, index) in cities"
-              :key="index"
-              class="p-2"
-              @click="setOrigin(city)"
+            <ul
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              :class="[
+                { '-bottom-0': isMenu1Open },
+                { '-bottom-full': !isMenu1Open },
+              ]"
             >
-              {{ city.title }}
-            </li>
-          </ul>
+              <li
+                v-for="(city, index) in cities"
+                :key="index"
+                class="p-2"
+                @click="setOrigin(city)"
+              >
+                {{ city.title }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div
-          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer z-40"
+          class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer"
           @click="openMenu('menu2')"
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
@@ -52,23 +57,28 @@
             <p class="text-black/70" ref="destTitle">تهران</p>
           </div>
           <IconsDownArrow class="text-primary text-lg" />
-          <ul
-            class="absolute w-full left-0 top-12 bg-primary divide-y rounded-b-lg text-white text-end overflow-scroll"
-            :class="[
-              { invisible: !isMenu2Open },
-              { 'h-0': !isMenu2Open },
-              { 'h-36': isMenu2Open },
-            ]"
+          <div
+            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
+            :class="[{ invisible: !isMenu2Open }]"
+            @click="isMenu2Open = true"
           >
-            <li
-              v-for="(city, index) in cities"
-              :key="index"
-              class="p-2"
-              @click="setDest(city)"
+            <ul
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              :class="[
+                { '-bottom-0': isMenu2Open },
+                { '-bottom-full': !isMenu2Open },
+              ]"
             >
-              {{ city.title }}
-            </li>
-          </ul>
+              <li
+                v-for="(city, index) in cities"
+                :key="index"
+                class="p-2"
+                @click="setDest(city)"
+              >
+                {{ city.title }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -124,7 +134,11 @@ function setDest(data) {
   display: none !important;
 }
 
+.invisible {
+  transition: visibility 0.1s 0.1s;
+}
+
 ul {
-  transition: height 0.2s, visibility 0.2s;
+  transition: bottom 0.3s;
 }
 </style>

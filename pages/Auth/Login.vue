@@ -5,7 +5,7 @@
     <!-- Back Button -->
     <SectionsBackButton />
     <div class="flex gap-4 flex-col items-between space-y-12">
-      <NuxtImg
+      <img
         src="/images/trucklogin.png"
         alt="Truck login"
         class="max-w-xs object-fill"

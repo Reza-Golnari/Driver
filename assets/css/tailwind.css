@@ -6,6 +6,10 @@
   .navLink-active {
     @apply text-white bg-primary  rounded-full;
   }
+
+  .subMenu {
+    @apply fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg h-96 divide-primary border-2 border-primary;
+  }
 }
 
 *::-webkit-scrollbar {

@@ -24,7 +24,7 @@
             @click="isMenu1Open = true"
           >
             <ul
-              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg h-96 divide-primary border-2 border-primary"
               :class="[
                 { '-bottom-0': isMenu1Open },
                 { '-bottom-full': !isMenu1Open },
@@ -34,7 +34,7 @@
                 v-for="(city, index) in cities"
                 :key="index"
                 @click="setOrigin(city)"
-                class="p-2"
+                class="p-3 pb-1"
               >
                 {{ city.title }}
               </li>
@@ -73,7 +73,7 @@
             @click="isMenu2Open = true"
           >
             <ul
-              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg h-96 divide-primary border-2 border-primary"
               :class="[
                 { '-bottom-0': isMenu2Open },
                 { '-bottom-full': !isMenu2Open },
@@ -83,7 +83,7 @@
                 v-for="(city, index) in cities"
                 :key="index"
                 @click="setDestination(city)"
-                class="p-2"
+                class="p-3 pb-1"
               >
                 {{ city.title }}
               </li>

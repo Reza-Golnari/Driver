@@ -20,7 +20,7 @@
           @click="isDrop1Open = false"
         >
           <ul
-            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 h-96 divide-primary border-2 border-primary"
             :class="[
               { '-bottom-0': isDrop1Open },
               { '-bottom-full': !isDrop1Open },
@@ -51,7 +51,7 @@
           @click="isDrop2Open = false"
         >
           <ul
-            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 h-96 divide-primary border-2 border-primary"
             :class="[
               { '-bottom-0': isDrop2Open },
               { '-bottom-full': !isDrop2Open },
@@ -82,7 +82,7 @@
           @click="isDrop3Open = false"
         >
           <ul
-            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-primary text-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 pb-2 h-96"
+            class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 h-96 divide-primary border-2 border-primary"
             :class="[
               { '-bottom-0': isDrop3Open },
               { '-bottom-full': !isDrop3Open },

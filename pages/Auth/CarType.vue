@@ -103,7 +103,7 @@
         v-show="isSelected"
         @click="submit()"
         class="block bg-primary disabled:bg-gray-300 disabled:cursor-default disabled:text-black/70 text-white text-center w-full mx-auto py-4 px-8 rounded-lg cursor-pointer"
-        :disabled="selectNumber !== 3"
+        :disabled="!showBtn"
       >
         شروع کار
       </button>
@@ -113,7 +113,7 @@
 
 <script setup>
 const authStore = useAuthStore();
-const selectNumber = ref(0);
+const showBtn = ref(false);
 const isDrop1Open = ref(false);
 const isDrop2Open = ref(false);
 const isDrop3Open = ref(false);
@@ -121,6 +121,9 @@ const isSelected = ref(false);
 const mainCarTypeInput = ref();
 const carNumberInput = ref();
 const carInfoInput = ref();
+const isCarType = ref(false);
+const isCarNumber = ref(false);
+const isCarInfo = ref(false);
 const mainCarTypeList = ref([
   "تریلی",
   "تریلی",
@@ -134,6 +137,11 @@ const mainCarTypeList = ref([
   "تریلی",
 ]);
 
+watchEffect(() => {
+  if (isCarType.value && isCarNumber.value && isCarInfo.value)
+    showBtn.value = true;
+});
+
 function setCarInformation(event, drop) {
   switch (drop) {
     case "isDrop1Open":
@@ -141,21 +149,21 @@ function setCarInformation(event, drop) {
       mainCarTypeInput.value.textContent = event.target.textContent;
       isSelected.value = true;
       isDrop1Open.value = false;
-      selectNumber.value = 1;
+      isCarType.value = true;
 
       break;
     case "isDrop2Open":
       openSubMenu();
       carInfoInput.value.textContent = event.target.textContent;
       isDrop2Open.value = false;
-      selectNumber.value = 2;
+      isCarInfo.value = true;
 
       break;
     case "isDrop3Open":
       openSubMenu();
       carNumberInput.value.textContent = event.target.textContent;
       isDrop3Open.value = false;
-      selectNumber.value = 3;
+      isCarNumber.value = true;
       break;
   }
 }

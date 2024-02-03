@@ -68,7 +68,7 @@
           </ul>
         </div>
       </div>
-      <div class="relative" v-show="isSelected">
+      <!-- <div class="relative" v-show="isSelected">
         <div
           class="bg-primary text-white w-full mx-auto flex items-center justify-between py-4 px-8 rounded-lg cursor-pointer"
           @click="openSubMenu('isDrop3Open')"
@@ -98,7 +98,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> -->
       <button
         v-show="isSelected"
         @click="submit()"
@@ -116,13 +116,13 @@ const authStore = useAuthStore();
 const showBtn = ref(false);
 const isDrop1Open = ref(false);
 const isDrop2Open = ref(false);
-const isDrop3Open = ref(false);
+// const isDrop3Open = ref(false);
 const isSelected = ref(false);
 const mainCarTypeInput = ref();
 const carNumberInput = ref();
 const carInfoInput = ref();
 const isCarType = ref(false);
-const isCarNumber = ref(false);
+// const isCarNumber = ref(false);
 const isCarInfo = ref(false);
 const mainCarTypeList = ref([
   "تریلی",
@@ -138,8 +138,8 @@ const mainCarTypeList = ref([
 ]);
 
 watchEffect(() => {
-  if (isCarType.value && isCarNumber.value && isCarInfo.value)
-    showBtn.value = true;
+  // if (isCarType.value && isCarNumber.value && isCarInfo.value)
+  if (isCarType.value && isCarInfo.value) showBtn.value = true;
 });
 
 function setCarInformation(event, drop) {
@@ -161,9 +161,9 @@ function setCarInformation(event, drop) {
       break;
     case "isDrop3Open":
       openSubMenu();
-      carNumberInput.value.textContent = event.target.textContent;
-      isDrop3Open.value = false;
-      isCarNumber.value = true;
+      // carNumberInput.value.textContent = event.target.textContent;
+      // isDrop3Open.value = false;
+      // isCarNumber.value = true;
       break;
   }
 }
@@ -172,18 +172,18 @@ function openSubMenu(drop) {
   switch (drop) {
     case "isDrop1Open":
       isDrop2Open.value = false;
-      isDrop3Open.value = false;
+      // isDrop3Open.value = false;
       isDrop1Open.value = !isDrop1Open.value;
       break;
     case "isDrop2Open":
       isDrop1Open.value = false;
-      isDrop3Open.value = false;
+      // isDrop3Open.value = false;
       isDrop2Open.value = !isDrop2Open.value;
       break;
     case "isDrop3Open":
       isDrop1Open.value = false;
       isDrop2Open.value = false;
-      isDrop3Open.value = !isDrop3Open.value;
+      // isDrop3Open.value = !isDrop3Open.value;
       break;
   }
 }
@@ -192,7 +192,7 @@ function submit() {
   authStore.saveLoginData({
     carType: mainCarTypeInput.value,
     carInfo: carInfoInput.value,
-    carNumber: carNumberInput.value,
+    // carNumber: carNumberInput.value,
   });
   navigateTo("/profile");
 }

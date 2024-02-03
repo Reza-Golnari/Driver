@@ -25,6 +25,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
+      title: "آرام بار",
       link: [
         { rel: "icon", href: "/images/icon-192.png" },
         { rel: "manifest", href: "/manifest.json" },

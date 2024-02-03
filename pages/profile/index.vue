@@ -147,19 +147,35 @@
       <nav
         class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
       >
-        <NuxtLink to="/profile" class="text-black p-2 md:p-3">
+        <NuxtLink
+          to="/profile"
+          active-class="navLink-active"
+          class="text-black p-2 md:p-3"
+        >
           <IconsHome />
         </NuxtLink>
-        <NuxtLink to="/profile/history" class="p-2 md:p-3">
+        <NuxtLink
+          to="/profile/history"
+          active-class="navLink-active"
+          class="p-2 md:p-3"
+        >
           <IconsHistory />
         </NuxtLink>
-        <NuxtLink to="/profile/location" class="navLink-active p-2 md:p-3">
+        <NuxtLink
+          to="/profile/map"
+          active-class="navLink-active"
+          class="p-2 md:p-3"
+        >
           <IconsLocation />
         </NuxtLink>
-        <NuxtLink to="/profile/panel" class="p-2 md:p-3">
+        <NuxtLink
+          to="/profile/panel"
+          active-class="navLink-active"
+          class="p-2 md:p-3"
+        >
           <IconsPerson />
         </NuxtLink>
-        <NuxtLink to="/team" class="p-2 md:p-3">
+        <NuxtLink to="/team" active-class="navLink-active" class="p-2 md:p-3">
           <IconsHeadphone />
         </NuxtLink>
       </nav>

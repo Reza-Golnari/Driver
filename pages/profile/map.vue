@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <div
-      class="w-full md:max-w-[500px] flex flex-col items-center justify-between py-4"
+      class="w-full md:max-w-[500px] flex flex-col items-center justify-between py-4 pb-24"
     >
       <SectionsBackButton />
       <NeshanMap
@@ -83,6 +83,45 @@
       </div>
 
       <SectionsBarCard :data="{ callBtn: true }" />
+      <div
+        class="fixed bottom-2 w-11/12 md:w-[500px] bg-white py-2 shadow-md rounded-md"
+      >
+        <nav
+          class="flex items-center justify-between text-black/40 text-3xl max-h-14 px-4 py-6"
+        >
+          <NuxtLink
+            to="/profile"
+            active-class="navLink-active"
+            class="text-black p-2 md:p-3"
+          >
+            <IconsHome />
+          </NuxtLink>
+          <NuxtLink
+            to="/profile/history"
+            active-class="navLink-active"
+            class="p-2 md:p-3"
+          >
+            <IconsHistory />
+          </NuxtLink>
+          <NuxtLink
+            to="/profile/map"
+            active-class="navLink-active"
+            class="p-2 md:p-3"
+          >
+            <IconsLocation />
+          </NuxtLink>
+          <NuxtLink
+            to="/profile/panel"
+            active-class="navLink-active"
+            class="p-2 md:p-3"
+          >
+            <IconsPerson />
+          </NuxtLink>
+          <NuxtLink to="/team" active-class="navLink-active" class="p-2 md:p-3">
+            <IconsHeadphone />
+          </NuxtLink>
+        </nav>
+      </div>
     </div>
   </ClientOnly>
 </template>

@@ -9,7 +9,7 @@
         mapKey="web.6ec8e70dc16b441ab69604328db2df28"
         serviceKey="service.90f18a9ef8ab47d0a983042d07f49e64"
         mapType="dreamy"
-        :center="{ latitude: 35.69672648316882, longitude: 51.36281969540723 }"
+        :center="{ latitude: 35.8668, longitude: 47.60506 }"
         :scale="0.5"
         poi="false"
         class="w-full h-72 shadow-md rounded-md"

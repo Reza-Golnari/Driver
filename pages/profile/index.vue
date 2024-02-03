@@ -93,7 +93,7 @@
         <div>
           <div data-v0-t="card" class="space-y-3">
             <NuxtLink
-              :to="isAuth ? '/' : ''"
+              :to="isAuth ? '/profile/map' : ''"
               class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
               :class="{ 'bg-gray-300': !isAuth }"
               dir="rtl"

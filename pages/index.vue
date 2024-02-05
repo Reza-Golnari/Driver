@@ -1,7 +1,14 @@
 <template>
-  <div>asdf</div>
+  <div
+    class="bg-primary h-screen w-full flex items-center justify-center cursor-pointer"
+    @click="changeRoute()"
+  >
+    <img src="/images/splash.png" class="w-2/3 max-w-96" />
+  </div>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<script setup lang="ts">
+function changeRoute() {
+  navigateTo("/Auth");
+}
+</script>

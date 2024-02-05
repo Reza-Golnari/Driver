@@ -9,7 +9,7 @@
         <div class="flex flex-col space-y-16">
           <div class="flex flex-col gap-4 items-center">
             <div
-              class="flex flex-row items-center justify-between mx-auto w-full max-w-xs"
+              class="flex flex-row items-center justify-between mx-auto w-full"
             >
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
@@ -50,10 +50,23 @@
               <div class="w-16 h-16 pr-1 mr-2">
                 <input
                   @input="checkToken"
+                  @keyup="(e) => focusNext(e, inputFive)"
                   ref="inputFour"
                   class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
                   type="text"
                   v-model="four"
+                  size="1"
+                  pattern="[0-9]"
+                  required
+                />
+              </div>
+              <div class="w-16 h-16 pr-1 mr-2">
+                <input
+                  @input="checkToken"
+                  ref="inputFive"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
+                  type="text"
+                  v-model="five"
                   size="1"
                   pattern="[0-9]"
                   required
@@ -92,6 +105,7 @@ const inputOne = ref(null);
 const inputTwo = ref(null);
 const inputThree = ref(null);
 const inputFour = ref(null);
+const inputFive = ref(null);
 
 function focusNext(e, inputRef) {
   if (e.target.value.length > 0) {
@@ -103,18 +117,21 @@ const one = ref();
 const two = ref();
 const three = ref();
 const four = ref();
+const five = ref();
 
 async function checkToken() {
   nextTick(async () => {
-    if (one.value && two.value && three.value && four.value) {
-      const token = one.value + two.value + three.value + four.value;
+    if (one.value && two.value && three.value && four.value && five.value) {
+      const token =
+        one.value + two.value + three.value + four.value + five.value;
+      console.log(token);
       const res = await sendRequest({
         method: "POST",
         url: "/otp/verify-otp",
         data: {
-          model: authStore.loginData.type,
           mobile: authStore.loginData.mobile,
           token,
+          model: authStore.loginData.type,
         },
         newHeader: {},
       });
@@ -132,12 +149,16 @@ async function sendCode() {
       method: "POST",
       url: "/otp/send-otp",
       data: {
-        model: authStore.loginData.type,
         mobile: authStore.loginData.mobile,
       },
-      newHeader: {},
+      newHeader: {
+        "Content-Type": "application/vnd.api+json",
+      },
     });
-  } catch (error) {}
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 onMounted(() => {

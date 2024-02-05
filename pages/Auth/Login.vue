@@ -151,7 +151,7 @@ onMounted(() => {
     route.query?.type == undefined ||
     route.query?.type.toString().trim() == ""
   ) {
-    navigateTo("/");
+    navigateTo("/Auth");
   }
   focusInputRef(prefixInputRef);
 });

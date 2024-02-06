@@ -2,9 +2,16 @@
 import Cookie from "js-cookie";
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const token = Cookie.get("token");
-  console.log(token);
-  if (!token) navigateTo("/");
-  if (token && to.fullPath === "/") navigateTo("/profile/panel");
-  else if (token && to.fullPath.includes("/Auth")) navigateTo("/profile/panel");
+  if (process.client) {
+    const token = Cookie.get("token");
+    if (to.fullPath === "/" && token) return navigateTo("/profile/panel");
+    else if (
+      to.fullPath.includes("/Auth") &&
+      token &&
+      from.path !== "/Auth/Verify"
+    )
+      return navigateTo("/profile/panel");
+    else if (to.fullPath.includes("/profile") && !token) return navigateTo("/");
+    else return;
+  }
 });

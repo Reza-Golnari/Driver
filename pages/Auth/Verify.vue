@@ -135,8 +135,9 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      if (res.token) {
-        Cookie.set("token", res.token, { expires: 30, path: "/" });
+      console.log(res);
+      if (res.data.token) {
+        Cookie.set("token", res.data.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
       }
     }

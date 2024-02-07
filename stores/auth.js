@@ -6,7 +6,7 @@ export const useAuthStore = defineStore("auth", {
     return {
       loginData: {},
       token: "",
-      isloggedIn: false,
+      isLoggedIn: false,
       user: {},
     };
   },

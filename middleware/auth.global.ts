@@ -1,17 +1,18 @@
-// @ts-ignore
-import Cookie from "js-cookie";
+import { useCookie } from "#app";
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  if (process.client) {
-    const token = Cookie.get("token");
-    if (to.fullPath === "/" && token) return navigateTo("/profile/panel");
-    else if (
-      to.fullPath.includes("/Auth") &&
-      token &&
-      from.path !== "/Auth/Verify"
-    )
-      return navigateTo("/profile/panel");
-    else if (to.fullPath.includes("/profile") && !token) return navigateTo("/");
-    else return;
+  const cookies = useCookie("token");
+  const token = cookies.value;
+
+  if (to.path === "/" && token) {
+    return navigateTo("/profile/panel");
+  } else if (
+    to.path.includes("/Auth") &&
+    token &&
+    from.path !== "/Auth/Verify"
+  ) {
+    return navigateTo("/profile/panel");
+  } else if (to.path.includes("/profile") && !token) {
+    return navigateTo("/");
   }
 });

@@ -112,6 +112,9 @@
 </template>
 
 <script setup>
+import useAxios from "~/composables/useAxios";
+const { sendRequest } = useAxios();
+
 const authStore = useAuthStore();
 const showBtn = ref(false);
 const isDrop1Open = ref(false);
@@ -140,6 +143,15 @@ const mainCarTypeList = ref([
 watchEffect(() => {
   // if (isCarType.value && isCarNumber.value && isCarInfo.value)
   if (isCarType.value && isCarInfo.value) showBtn.value = true;
+});
+
+onMounted(async () => {
+  const res = await sendRequest({
+    method: "GET",
+    url: "/panel/loader/getAllLoaders",
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 });
 
 function setCarInformation(event, drop) {

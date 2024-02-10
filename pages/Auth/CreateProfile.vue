@@ -51,7 +51,9 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import useAxios from "~/composables/useAxios";
+import Cookie from "js-cookie";
 const authStore = useAuthStore();
 const userNameInput = ref();
 const userCodeInput = ref();
@@ -85,30 +87,57 @@ function validateForm() {
   }
 }
 
+const token = Cookie.get("token");
+
+useHead({
+  meta: [
+    {
+      name: "_token",
+      content: token,
+    },
+  ],
+});
+
 async function submitForm() {
   validateForm();
   const spaceIndex = userNameInput.value.value.trim().indexOf(" ");
   const firstName = userNameInput.value.value.slice(0, spaceIndex);
-  const lastName = userNameInput.value.value.slice(spaceIndex);
+  const lastName = userNameInput.value.value.slice(spaceIndex).trim();
   const frmData = new FormData();
   frmData.append("photo", fileInput.value.files[0]);
   frmData.append("first_name", firstName);
   frmData.append("last_name", lastName);
   frmData.append("national_id", userCodeInput.value.value);
+  console.log(frmData.get("photo"));
+  console.log(frmData.get("first_name"));
+  console.log(frmData.get("last_name"));
+  console.log(frmData.get("national_id"));
 
-  const res = await sendRequest({
-    method: "POST",
-    url: "/panel/profile",
-    data: FormData,
-    newHeader: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  if (res.status.include("موفق")) {
-    authStore.saveUserData(res.data);
-    navigateTo("/");
-  } else {
-    errorMsg.value.textContent = res.message;
-  }
+  // const res = await sendRequest({
+  //   method: "POST",
+  //   url: "/panel/profile",
+  //   data: FormData,
+  //   newHeader: {
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  // });
+
+  // if (res.status.include("موفق")) {
+  //   authStore.saveUserData(res.data);
+  //   navigateTo("/");
+  // } else {
+  //   errorMsg.value.textContent = res.message;
+  // }
+
+  axios
+    .post("https://arambar.liara.run/panel/profile", frmData, {
+      headers: {
+        "X-CSRF-TOKEN": token,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 }
 </script>

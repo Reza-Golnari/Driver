@@ -124,7 +124,6 @@ async function checkToken() {
     if (one.value && two.value && three.value && four.value && five.value) {
       const token =
         one.value + two.value + three.value + four.value + five.value;
-      console.log(token);
       const res = await sendRequest({
         method: "POST",
         url: "/otp/verify-otp",
@@ -135,9 +134,8 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      console.log(res);
-      if (res.data.token) {
-        Cookie.set("token", res.data.token, { expires: 30, path: "/" });
+      if (res.data.data.token) {
+        Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
       }
     }
@@ -146,7 +144,7 @@ async function checkToken() {
 
 async function sendCode() {
   try {
-    const res = await sendRequest({
+    await sendRequest({
       method: "POST",
       url: "/otp/send-otp",
       data: {
@@ -156,13 +154,13 @@ async function sendCode() {
         "Content-Type": "application/vnd.api+json",
       },
     });
-    console.log(res);
   } catch (error) {
     console.log(error);
   }
 }
 
 onMounted(() => {
+  if (!authStore.loginData.mobile) navigateTo("/");
   inputOne.value.focus();
   sendCode();
 });

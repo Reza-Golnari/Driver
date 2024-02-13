@@ -20,7 +20,7 @@
           @click="isDrop1Open = false"
         >
           <ul
-            class="subMenu"
+            class="subMenu max-h-72"
             :class="[
               { '-bottom-0': isDrop1Open },
               { '-bottom-full': !isDrop1Open },
@@ -29,10 +29,10 @@
             <li
               class="py-2 px-3 pt-3 cursor-pointer"
               @click="setCarInformation($event, 'isDrop1Open')"
-              v-for="(item, index) in mainCarTypeList"
-              :key="index"
+              v-for="item in mainCarTypeList"
+              :key="item.id"
             >
-              {{ item }}
+              {{ item.name }}
             </li>
           </ul>
         </div>
@@ -51,7 +51,7 @@
           @click="isDrop2Open = false"
         >
           <ul
-            class="subMenu"
+            class="subMenu max-h-72"
             :class="[
               { '-bottom-0': isDrop2Open },
               { '-bottom-full': !isDrop2Open },
@@ -60,10 +60,10 @@
             <li
               class="py-2 px-3 pt-3 cursor-pointer"
               @click="setCarInformation($event, 'isDrop2Open')"
-              v-for="(item, index) in mainCarTypeList"
-              :key="index"
+              v-for="item in subCarInfoList"
+              :key="item.id"
             >
-              {{ item }}
+              {{ item.name }}
             </li>
           </ul>
         </div>
@@ -122,23 +122,13 @@ const isDrop2Open = ref(false);
 // const isDrop3Open = ref(false);
 const isSelected = ref(false);
 const mainCarTypeInput = ref();
-const carNumberInput = ref();
+// const carNumberInput = ref();
 const carInfoInput = ref();
 const isCarType = ref(false);
 // const isCarNumber = ref(false);
 const isCarInfo = ref(false);
-const mainCarTypeList = ref([
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-  "تریلی",
-]);
+const mainCarTypeList = ref([]);
+const subCarInfoList = ref([]);
 
 watchEffect(() => {
   // if (isCarType.value && isCarNumber.value && isCarInfo.value)
@@ -149,9 +139,8 @@ onMounted(async () => {
   const res = await sendRequest({
     method: "GET",
     url: "/panel/loader/getAllLoaders",
-  })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  });
+  if (res.status === 200) mainCarTypeList.value = res.data.data;
 });
 
 function setCarInformation(event, drop) {
@@ -162,6 +151,7 @@ function setCarInformation(event, drop) {
       isSelected.value = true;
       isDrop1Open.value = false;
       isCarType.value = true;
+      setSubCarInfoList(mainCarTypeInput.value.textContent);
 
       break;
     case "isDrop2Open":
@@ -178,6 +168,16 @@ function setCarInformation(event, drop) {
       // isCarNumber.value = true;
       break;
   }
+}
+
+function setSubCarInfoList(text) {
+  mainCarTypeList.value.some((item) => {
+    if (item.name === text) {
+      subCarInfoList.value = item.childs;
+      return true;
+    }
+  });
+  carInfoInput.value.textContent = subCarInfoList.value[0].name;
 }
 
 function openSubMenu(drop) {

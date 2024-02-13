@@ -51,9 +51,7 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import useAxios from "~/composables/useAxios";
-import Cookie from "js-cookie";
 const authStore = useAuthStore();
 const userNameInput = ref();
 const userCodeInput = ref();
@@ -86,17 +84,6 @@ function validateForm() {
     isError.value = false;
   }
 }
-
-const token = Cookie.get("token");
-
-useHead({
-  meta: [
-    {
-      name: "_token",
-      content: token,
-    },
-  ],
-});
 
 async function submitForm() {
   validateForm();

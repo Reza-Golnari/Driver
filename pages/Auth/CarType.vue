@@ -129,6 +129,7 @@ const isCarType = ref(false);
 const isCarInfo = ref(false);
 const mainCarTypeList = ref([]);
 const subCarInfoList = ref([]);
+let selectedCarID;
 
 watchEffect(() => {
   // if (isCarType.value && isCarNumber.value && isCarInfo.value)
@@ -159,6 +160,12 @@ function setCarInformation(event, drop) {
       carInfoInput.value.textContent = event.target.textContent;
       isDrop2Open.value = false;
       isCarInfo.value = true;
+      subCarInfoList.value.some((item) => {
+        if (item.name === carInfoInput.value.textContent) {
+          selectedCarID = item.id;
+          return true;
+        }
+      });
 
       break;
     case "isDrop3Open":
@@ -200,13 +207,21 @@ function openSubMenu(drop) {
   }
 }
 
-function submit() {
+async function submit() {
   authStore.saveLoginData({
     carType: mainCarTypeInput.value,
     carInfo: carInfoInput.value,
     // carNumber: carNumberInput.value,
   });
-  navigateTo("/profile");
+  const res = await sendRequest({
+    method: "POST",
+    url: "/panel/profile/chooseLoader",
+    data: {
+      id: selectedCarID,
+    },
+  });
+  console.log(res);
+  // navigateTo("/profile");
 }
 </script>
 

@@ -83,8 +83,7 @@
       </li>
       <li>
         <NuxtLink
-          to="/"
-          class="flex items-center justify-end gap-x-3 font-bold text-red-600"
+          class="flex items-center justify-end gap-x-3 font-bold text-red-600 cursor-pointer"
           @click="logout"
         >
           خروج از حساب
@@ -101,10 +100,10 @@ import useAxios from "~/composables/useAxios";
 const { sendRequest } = useAxios();
 
 async function logout() {
-  await sendRequest({
-    method: "GET",
-    url: "/panel/logout",
-  });
   Cookie.remove("token");
+  const res = await sendRequest({
+    method: "POST",
+    url: "/logout",
+  });
 }
 </script>

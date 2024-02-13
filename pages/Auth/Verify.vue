@@ -9,7 +9,7 @@
         <div class="flex flex-col space-y-16">
           <div class="flex flex-col gap-4 items-center">
             <div
-              class="flex flex-row items-center justify-between mx-auto w-full"
+              class="flex flex-row items-center justify-between mx-auto w-full scale-90 md:scale-100"
             >
               <div class="w-16 h-16 pr-1 mr-2">
                 <input

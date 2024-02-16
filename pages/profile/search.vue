@@ -16,8 +16,13 @@
           class="relative text-end border-b w-3/4 border-black/30 pb-1 cursor-pointer"
           @click="openMenu('menu1')"
         >
-          <h5 class="text-xl font-bold" ref="originTitle">میبد</h5>
-          <p class="text-sm" ref="originSubtitle">استان یزد</p>
+          <input
+            type="text"
+            class="outline-none bg-transparent p-2"
+            dir="rtl"
+            v-model="originInput"
+            @input="searchCities"
+          />
           <div
             class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
             :class="[{ invisible: !isMenu1Open }]"
@@ -108,12 +113,47 @@
 </template>
 
 <script setup>
+import axios from "axios";
+import useAxios from "~/composables/useAxios";
+import Cookies from "js-cookie";
+
+const { sendRequest } = useAxios();
+
 const isMenu1Open = ref(false);
 const isMenu2Open = ref(false);
 const originTitle = ref();
 const destTitle = ref();
 const originSubtitle = ref();
 const destSubtitle = ref();
+const originInput = ref();
+
+async function searchCities() {
+  const res = await sendRequest({
+    method: "POST",
+    url: "/panel/map/search",
+    data: {
+      keyword: originInput.value,
+    },
+  });
+  console.log(res);
+
+  // const token = Cookies.get("token");
+
+  // await axios
+  //   .post(
+  //     "https://arambar.liara.run/api/panel/map/search",
+  //     {
+  //       keyword: originInput.value,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   )
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log(err));
+}
 
 const cities = ref([
   { title: "اصفهان", subtitle: "استان اصفهان" },
@@ -151,13 +191,13 @@ function change() {
 }
 
 function openMenu(menu) {
-  if (menu === "menu1") {
-    isMenu1Open.value = !isMenu1Open.value;
-    isMenu2Open.value = false;
-    return;
-  }
-  isMenu2Open.value = !isMenu2Open.value;
-  isMenu1Open.value = false;
+  // if (menu === "menu1") {
+  //   isMenu1Open.value = !isMenu1Open.value;
+  //   isMenu2Open.value = false;
+  //   return;
+  // }
+  // isMenu2Open.value = !isMenu2Open.value;
+  // isMenu1Open.value = false;
 }
 
 function search() {

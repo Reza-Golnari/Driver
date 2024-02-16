@@ -137,6 +137,10 @@ watchEffect(() => {
 });
 
 onMounted(async () => {
+  // check user type
+  if (authStore.user.type === "shipper") navigateTo("/Auth/CreateProfile");
+
+  // get loaders
   const res = await sendRequest({
     method: "GET",
     url: "/panel/loader/getAllLoaders",
@@ -217,11 +221,10 @@ async function submit() {
     method: "POST",
     url: "/panel/profile/chooseLoader",
     data: {
-      id: selectedCarID,
+      loader: selectedCarID,
     },
   });
-  console.log(res);
-  // navigateTo("/profile");
+  if (res.status === 200) navigateTo("/profile");
 }
 </script>
 

@@ -99,6 +99,9 @@
       </div>
       <button
         class="bg-primary text-white disabled:opacity-70 py-3 px-10 w-full rounded-lg transition-opacity"
+        :disabled="
+          !originInput || !destInput || !isOriginSelected || !isDestSelected
+        "
         @click="search()"
       >
         جستجوی بار
@@ -193,6 +196,13 @@ function change() {
 }
 
 function search() {
+  if (
+    !originInput.value ||
+    !destInput.value ||
+    !isOriginSelected.value ||
+    !isDestSelected.value
+  )
+    return;
   navigateTo("/profile/map");
 }
 </script>

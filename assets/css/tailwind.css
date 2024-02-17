@@ -8,7 +8,7 @@
   }
 
   .subMenu {
-    @apply fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg max-h-64 h-max divide-primary border-2 border-primary;
+    @apply fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-96 bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-t-lg max-h-64 h-max divide-primary border-2 border-primary;
   }
 }
 

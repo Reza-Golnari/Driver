@@ -14,37 +14,32 @@
         </div>
         <div
           class="relative text-end border-b w-3/4 border-black/30 pb-1 cursor-pointer"
-          @click="openMenu('menu1')"
         >
+          <h5 class="text-xl font-bold" ref="originTitle"></h5>
           <input
             type="text"
             class="outline-none bg-transparent p-2"
             dir="rtl"
+            placeholder="انتخاب مبدا"
             v-model="originInput"
-            @input="searchCities"
+            @input="searchCities('origin', originInput)"
           />
-          <div
-            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
-            :class="[{ invisible: !isMenu1Open }]"
-            @click="isMenu1Open = true"
+          <ul
+            class="subMenu"
+            :class="[
+              { '-bottom-0': isMenu1Open },
+              { '-bottom-full': !isMenu1Open },
+            ]"
           >
-            <ul
-              class="subMenu"
-              :class="[
-                { '-bottom-0': isMenu1Open },
-                { '-bottom-full': !isMenu1Open },
-              ]"
+            <li
+              v-for="(city, index) in originList"
+              :key="index"
+              @click="setOrigin(city)"
+              class="p-3 pb-1"
             >
-              <li
-                v-for="(city, index) in cities"
-                :key="index"
-                @click="setOrigin(city)"
-                class="p-3 pb-1"
-              >
-                {{ city.title }}
-              </li>
-            </ul>
-          </div>
+              {{ city.name }}
+            </li>
+          </ul>
         </div>
         <div
           class="absolute left-0 cursor-pointer"
@@ -68,32 +63,32 @@
         </div>
         <div
           class="relative text-end border-b w-3/4 border-black/30 pb-1 cursor-pointer"
-          @click="openMenu('menu2')"
         >
-          <h5 class="text-xl font-bold" ref="destTitle">تهران</h5>
-          <p class="text-sm" ref="destSubtitle">استان تهران</p>
-          <div
-            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
-            :class="[{ invisible: !isMenu2Open }]"
-            @click="isMenu2Open = true"
+          <h5 class="text-xl font-bold" ref="destTitle"></h5>
+          <input
+            type="text"
+            class="outline-none bg-transparent p-2"
+            dir="rtl"
+            placeholder="انتخاب مقصد"
+            v-model="destInput"
+            @input="searchCities('dest', destInput)"
+          />
+          <ul
+            class="subMenu"
+            :class="[
+              { '-bottom-0': isMenu2Open },
+              { '-bottom-full': !isMenu2Open },
+            ]"
           >
-            <ul
-              class="subMenu"
-              :class="[
-                { '-bottom-0': isMenu2Open },
-                { '-bottom-full': !isMenu2Open },
-              ]"
+            <li
+              v-for="(city, index) in destList"
+              :key="index"
+              @click="setDestination(city)"
+              class="p-3 pb-1"
             >
-              <li
-                v-for="(city, index) in cities"
-                :key="index"
-                @click="setDestination(city)"
-                class="p-3 pb-1"
-              >
-                {{ city.title }}
-              </li>
-            </ul>
-          </div>
+              {{ city.name }}
+            </li>
+          </ul>
         </div>
         <div
           class="absolute left-0 cursor-pointer"
@@ -103,7 +98,7 @@
         </div>
       </div>
       <button
-        class="bg-primary text-white py-3 px-10 w-full rounded-lg"
+        class="bg-primary text-white disabled:opacity-70 py-3 px-10 w-full rounded-lg transition-opacity"
         @click="search()"
       >
         جستجوی بار
@@ -113,91 +108,88 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import useAxios from "~/composables/useAxios";
-import Cookies from "js-cookie";
 
 const { sendRequest } = useAxios();
 
 const isMenu1Open = ref(false);
 const isMenu2Open = ref(false);
+const canFetchCities = ref(true);
 const originTitle = ref();
 const destTitle = ref();
-const originSubtitle = ref();
-const destSubtitle = ref();
 const originInput = ref();
+const destInput = ref();
+const originList = ref([]);
+const destList = ref([]);
+const isOriginSelected = ref(false);
+const isDestSelected = ref(false);
 
-async function searchCities() {
+watch(originInput, (newValue, oldValue) => {
+  if (oldValue && !newValue) canFetchCities.value = false;
+  else canFetchCities.value = true;
+});
+watch(destInput, (newValue, oldValue) => {
+  if (oldValue && !newValue) canFetchCities.value = false;
+  else canFetchCities.value = true;
+});
+
+async function searchCities(type, value) {
+  if (!canFetchCities.value) {
+    if (type === "origin") {
+      originList.value = [];
+      isMenu1Open.value = false;
+      originTitle.value.textContent = "";
+      originInput.value = "";
+      isOriginSelected.value = false;
+    } else {
+      destList.value = [];
+      isMenu2Open.value = false;
+      destTitle.value.textContent = "";
+      destInput.value = "";
+      isDestSelected.value = false;
+    }
+    return;
+  }
   const res = await sendRequest({
     method: "POST",
     url: "/panel/map/search",
     data: {
-      keyword: originInput.value,
+      keyword: value,
     },
   });
-  console.log(res);
-
-  // const token = Cookies.get("token");
-
-  // await axios
-  //   .post(
-  //     "https://arambar.liara.run/api/panel/map/search",
-  //     {
-  //       keyword: originInput.value,
-  //     },
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   )
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
+  if (res.status === 200) {
+    if (type === "origin") {
+      originList.value = res.data.data;
+      isMenu1Open.value = true;
+    } else {
+      destList.value = res.data.data;
+      isMenu2Open.value = true;
+    }
+  }
 }
 
-const cities = ref([
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "مشهد", subtitle: "استان مشهد" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-]);
-
 function setOrigin(data) {
-  originTitle.value.textContent = data.title;
-  originSubtitle.value.textContent = data.subtitle;
+  originTitle.value.textContent = data.state_name;
+  originInput.value = data.fname;
   isMenu1Open.value = false;
+  isOriginSelected.value = true;
 }
 
 function setDestination(data) {
-  destTitle.value.textContent = data.title;
-  destSubtitle.value.textContent = data.subtitle;
+  destTitle.value.textContent = data.state_name;
+  destInput.value = data.fname;
   isMenu2Open.value = false;
+  isDestSelected.value = true;
 }
 
 function change() {
   const oldOriginTitle = originTitle.value.textContent;
-  const oldOriginSubTitle = originSubtitle.value.textContent;
+  const oldOriginSubTitle = originInput.value;
 
   originTitle.value.textContent = destTitle.value.textContent;
-  originSubtitle.value.textContent = destSubtitle.value.textContent;
+  originInput.value = destInput.value;
   destTitle.value.textContent = oldOriginTitle;
-  destSubtitle.value.textContent = oldOriginSubTitle;
-}
-
-function openMenu(menu) {
-  // if (menu === "menu1") {
-  //   isMenu1Open.value = !isMenu1Open.value;
-  //   isMenu2Open.value = false;
-  //   return;
-  // }
-  // isMenu2Open.value = !isMenu2Open.value;
-  // isMenu1Open.value = false;
+  destInput.value = oldOriginSubTitle;
 }
 
 function search() {

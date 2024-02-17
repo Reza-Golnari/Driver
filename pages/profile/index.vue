@@ -184,8 +184,11 @@
 </template>
 
 <script setup>
+
+const authStore = useAuthStore();
+
 const showMenu = ref(false);
-const isAuth = ref(true);
+const isAuth = authStore.isLoggedIn;
 </script>
 
 <style scoped>

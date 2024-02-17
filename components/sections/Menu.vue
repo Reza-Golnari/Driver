@@ -95,15 +95,16 @@
 </template>
 
 <script setup>
-import Cookie from "js-cookie";
 import useAxios from "~/composables/useAxios";
 const { sendRequest } = useAxios();
 
+const authStore = useAuthStore();
+
 async function logout() {
-  Cookie.remove("token");
   const res = await sendRequest({
     method: "POST",
     url: "/logout",
   });
+  if (res.status === 200) authStore.logout();
 }
 </script>

@@ -6,7 +6,7 @@ export const useAuthStore = defineStore("auth", {
     return {
       loginData: {},
       token: "",
-      isLoggedIn: false,
+      isLoggedIn: "null",
       user: {},
     };
   },
@@ -23,6 +23,7 @@ export const useAuthStore = defineStore("auth", {
 
     logout() {
       Cookie.remove("token");
+      this.user = {};
     },
   },
 });

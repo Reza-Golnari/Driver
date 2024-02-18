@@ -22,13 +22,13 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   }
 
   if (to.path === "/" && token) {
-    return navigateTo("/profile/panel");
+    return navigateTo("/profile");
   } else if (
     to.path.includes("/Auth") &&
     token &&
     from.path !== "/Auth/Verify"
   ) {
-    return navigateTo("/profile/panel");
+    return navigateTo("/profile");
   } else if (to.path.includes("/profile") && !token) {
     return navigateTo("/");
   } else if (

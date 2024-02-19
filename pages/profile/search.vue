@@ -115,6 +115,8 @@ import useAxios from "~/composables/useAxios";
 
 const { sendRequest } = useAxios();
 
+const advStore = useAdvStore();
+
 const isMenu1Open = ref(false);
 const isMenu2Open = ref(false);
 const canFetchCities = ref(true);
@@ -176,6 +178,7 @@ function setOrigin(data) {
   originInput.value = data.fname;
   isMenu1Open.value = false;
   isOriginSelected.value = true;
+  advStore.destID = data.id;
 }
 
 function setDestination(data) {
@@ -183,6 +186,7 @@ function setDestination(data) {
   destInput.value = data.fname;
   isMenu2Open.value = false;
   isDestSelected.value = true;
+  advStore.originID = data.id;
 }
 
 function change() {
@@ -203,6 +207,8 @@ function search() {
     !isDestSelected.value
   )
     return;
+  advStore.originName = originInput.value;
+  advStore.destName = destInput.value;
   navigateTo("/profile/map");
 }
 </script>

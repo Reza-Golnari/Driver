@@ -21,8 +21,7 @@
       <div class="flex items-center justify-between p-2 gap-x-3">
         <div class="flex flex-col items-center gap-y-1">
           <IconsLocation class="md:text-4xl text-3xl text-primary" />
-          <h5 class="font-bold md:text-2xl text-xl">تهران</h5>
-          <p class="text-xs">استان تهران</p>
+          <h5 class="font-bold md:text-2xl text-xl">{{ info.origin.fname }}</h5>
         </div>
         <div
           class="w-1/2 flex flex-col items-center justify-between gap-y-4 pt-2"
@@ -33,8 +32,9 @@
         </div>
         <div class="flex flex-col items-center gap-y-1">
           <IconsCircle class="md:text-4xl text-3xl" />
-          <h5 class="font-bold md:text-2xl text-xl">میبد</h5>
-          <p class="text-xs">استان یزد</p>
+          <h5 class="font-bold md:text-2xl text-xl">
+            {{ info.destination.fname }}
+          </h5>
         </div>
       </div>
       <div>
@@ -85,5 +85,7 @@
 <script setup>
 const props = defineProps(["data"]);
 const data = props.data;
+const info = props.data.data;
+console.log(info);
 const isBtnShow = data.callBtn;
 </script>

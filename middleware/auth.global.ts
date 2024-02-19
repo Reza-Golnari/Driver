@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const cookies = useCookie("token");
   const token = cookies.value;
   const isAuth = computed(() => authStore.isActive);
-  console.log(to);
+
   if (isAuth.value === null) {
     const res = await sendRequest({
       method: "GET",

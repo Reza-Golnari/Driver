@@ -22,7 +22,9 @@
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
             <IconsCircle class="text-primary text-2xl" />
-            <p class="text-black/70" ref="originTitle">یزد</p>
+            <p class="text-black/70" ref="originTitle">
+              {{ advStore.originName }}
+            </p>
           </div>
           <IconsDownArrow class="text-primary text-lg" />
           <div
@@ -54,7 +56,7 @@
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
             <IconsLocation class="text-primary text-2xl" />
-            <p class="text-black/70" ref="destTitle">تهران</p>
+            <p class="text-black/70" ref="destTitle">{{ advStore.destName }}</p>
           </div>
           <IconsDownArrow class="text-primary text-lg" />
           <div
@@ -82,7 +84,12 @@
         </div>
       </div>
 
-      <SectionsBarCard :data="{ callBtn: true }" />
+      <SectionsBarCard
+        class="my-3"
+        v-for="card in data"
+        :key="data.id"
+        :data="{ callBtn: true, data: card }"
+      />
       <div
         class="fixed bottom-2 w-11/12 md:w-[500px] bg-white py-2 shadow-md rounded-md"
       >
@@ -127,11 +134,19 @@
 </template>
 <script setup>
 import NeshanMap from "@neshan-maps-platform/vue3-openlayers";
+import axios from "axios";
+import Cookies from "js-cookie";
+import useAxios from "~/composables/useAxios";
+
+const { sendRequest } = useAxios();
+const advStore = useAdvStore();
 
 const isMenu1Open = ref(false);
 const isMenu2Open = ref(false);
 const originTitle = ref();
 const destTitle = ref();
+
+const data = ref([]);
 
 const cities = ref([
   { title: "اصفهان", subtitle: "استان اصفهان" },
@@ -162,6 +177,25 @@ function setOrigin(data) {
 function setDest(data) {
   destTitle.value.textContent = data.title;
 }
+
+onMounted(async () => {
+  if (
+    !advStore.originName ||
+    !advStore.destName ||
+    !advStore.originID ||
+    !advStore.destID
+  )
+    navigateTo("/");
+  const res = await sendRequest({
+    method: "POST",
+    url: "/panel/driver/advertisers/search-cargo",
+    data: {
+      destination_id: 134555,
+      origin_id: 134555,
+    },
+  });
+  if (res.status === 200) data.value = res.data.data;
+});
 </script>
 
 <style>

@@ -11,10 +11,10 @@
         <p
           class="inline py-1 px-4 border border-primary text-primary rounded-xl text-sm"
         >
-          راننده
+          {{ authStore.user.role === "driver" ? "راننده" : "صاحب بار" }}
         </p>
-        <p>سید امین ابیاری میبدی</p>
-        <p>۰۹۹۳۹۳۳۳۶۶۴</p>
+        <p>{{ authStore.user.full_name }}</p>
+        <p>{{ authStore.user.mobile }}</p>
       </div>
       <div class="w-24 h-24 rounded-full overflow-hidden border">
         <img src="/images/profile.jpg" class="object-cover" />
@@ -37,11 +37,19 @@
     <div
       class="py-6 px-4 flex items-center justify-center flex-row-reverse gap-x-5 shadow-md bg-white rounded-lg"
     >
-      <p class="py-2 px-4 border border-green text-green rounded-xl shadow-md">
-        تایید شده
+      <p
+        class="py-2 px-4 border rounded-xl shadow-md"
+        :class="[
+          { 'border-green': authStore.user.isActive },
+          { 'border-red-500': !authStore.user.isActive },
+          { 'text-green': authStore.user.isActive },
+          { 'text-red-500': !authStore.user.isActive },
+        ]"
+      >
+        {{ authStore.user.isActive ? "تایید  شده" : "تایید نشده" }}
       </p>
       <p dir="rtl">شماره موبایل:</p>
-      <p>09939333664</p>
+      <p>{{ authStore.user.mobile }}</p>
     </div>
     <div class="bg-white p-3 rounded-lg shadow-md">
       <div
@@ -59,3 +67,7 @@
     </div>
   </div>
 </template>
+
+<script setup>
+const authStore = useAuthStore();
+</script>

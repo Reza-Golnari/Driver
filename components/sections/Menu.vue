@@ -11,7 +11,11 @@
         <p>{{ authStore.user.mobile }}</p>
       </div>
       <div class="w-1/3 rounded-full overflow-hidden">
-        <img src="/images/profile.jpg" />
+        <img
+          :src="authStore.user.profile_image"
+          v-if="authStore.user.profile_image"
+        />
+        <img src="/images/profile.jpg" v-else />
       </div>
     </div>
     <ul class="mt-5 pr-3 space-y-5">

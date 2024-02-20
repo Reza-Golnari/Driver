@@ -22,7 +22,14 @@
             <img
               class="aspect-square h-full w-full"
               alt="Profile picture"
+              :src="authStore.user.profile_image"
+              v-if="authStore.user.profile_image"
+            />
+            <img
+              class="aspect-square h-full w-full"
+              alt="Profile picture"
               src="/images/profile.jpg"
+              v-else
             />
           </NuxtLink>
           <div class="text-3xl flex items-center gap-x-2">
@@ -36,7 +43,7 @@
         </div>
         <div class="mb-4 space-y-2">
           <h1 class="text-lg font-semibold text-gray-900 rtl text-right">
-            سلام مجتبی غریب رضا یزدی خوش آمدید
+            سلام {{ authStore.user.full_name }} خوش آمدید
           </h1>
           <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>
         </div>

@@ -7,8 +7,8 @@
     </div>
     <div class="flex items-center justify-end mt-10 gap-x-4">
       <div class="text-end space-y-2">
-        <p>سید امین آبیاری میبدی</p>
-        <p>۰۹۹۳۹۳۳۳۶۶۴</p>
+        <p>{{ authStore.user.full_name }}</p>
+        <p>{{ authStore.user.mobile }}</p>
       </div>
       <div class="w-1/3 rounded-full overflow-hidden">
         <img src="/images/profile.jpg" />

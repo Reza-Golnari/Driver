@@ -9,10 +9,10 @@
 
       <div class="flex items-center gap-x-3">
         <div class="flex items-center gap-x-1">
-          <p class="text-xs mt-1">238</p>
+          <p class="text-xs mt-1">{{ info.view_count }}</p>
           <IconsEye />
         </div>
-        <div class="text-xs">دقایقی پیش</div>
+        <div class="text-xs">{{ time }}</div>
       </div>
     </div>
     <!-- End of Card Header -->
@@ -28,7 +28,7 @@
         >
           <p class="font-bold text-lg"><span>752</span>km</p>
           <img src="~/assets/icons/truck.svg" />
-          <p class="font-bold md:text-3xl text-xl">14.600.000</p>
+          <p class="font-bold md:text-3xl text-xl">{{ info.rental_amount }}</p>
         </div>
         <div class="flex flex-col items-center gap-y-1">
           <IconsCircle class="md:text-4xl text-3xl" />
@@ -43,7 +43,7 @@
         >
           <p>
             باربر :
-            <span> تریلی کفی - تریلی بغلدار - تریلی چادری</span>
+            <span>{{ loaders }}</span>
           </p>
         </div>
         <div
@@ -51,7 +51,7 @@
         >
           <p>
             کالا :
-            <span>پالت کاشی</span>
+            <span>{{ info.good_title }}</span>
           </p>
         </div>
         <div
@@ -86,6 +86,16 @@
 const props = defineProps(["data"]);
 const data = props.data;
 const info = props.data.data;
-console.log(info);
 const isBtnShow = data.callBtn;
+console.log(info);
+
+const loaders = ref("");
+const loaderArray = [];
+info.loaders.forEach((loader, index) => {
+  loaderArray.push(loader.name.trim());
+  loaders.value = loaderArray.join(" - ");
+});
+
+const date = new Date();
+const time = ref(date.toTimeString(info.created_at).slice(0, 5));
 </script>

@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <div
-      class="w-full md:max-w-[500px] flex flex-col items-center justify-between py-4 pb-24"
+      class="w-full md:max-w-[500px] flex flex-col items-center justify-between py-4 pb-24 px-4 md:mx-0"
     >
       <SectionsBackButton />
       <NeshanMap
@@ -134,8 +134,6 @@
 </template>
 <script setup>
 import NeshanMap from "@neshan-maps-platform/vue3-openlayers";
-import axios from "axios";
-import Cookies from "js-cookie";
 import useAxios from "~/composables/useAxios";
 
 const { sendRequest } = useAxios();

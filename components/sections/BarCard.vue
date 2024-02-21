@@ -57,9 +57,9 @@
         <div
           class="border-t border-black/50 md:text-sm text-xs text-center md:p-3 py-2 px-1"
         >
-          <p>
+          <p dir="rtl">
             توضیحات :
-            <span> کرایه توافقی - هماهنگی خانم لیلا زمانی</span>
+            <span>{{ info.description }}</span>
           </p>
         </div>
         <div
@@ -67,7 +67,7 @@
         >
           <p>
             تلفن جهت هماهنگی :
-            <span>09135997140</span>
+            <span>{{ info.agent_mobile }}</span>
           </p>
         </div>
         <button

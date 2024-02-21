@@ -61,8 +61,7 @@
         <p>بارگیر</p>
       </div>
       <p class="flex items-center text-lg gap-x-2 justify-center">
-        <span>12/20</span>
-        <span>تریلی</span>
+        {{ authStore.user.driver.loader.name }}
       </p>
     </div>
   </div>

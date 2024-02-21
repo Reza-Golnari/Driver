@@ -42,7 +42,10 @@
           </div>
         </div>
         <div class="mb-4 space-y-2">
-          <h1 class="text-lg font-semibold text-gray-900 rtl text-right">
+          <h1
+            class="text-lg font-semibold text-gray-900 rtl text-right"
+            dir="rtl"
+          >
             سلام {{ authStore.user.full_name }} خوش آمدید
           </h1>
           <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>

@@ -197,7 +197,7 @@
 const authStore = useAuthStore();
 
 const showMenu = ref(false);
-const isAuth = authStore.isActive;
+const isAuth = computed(() => authStore.isActive);
 </script>
 
 <style scoped>

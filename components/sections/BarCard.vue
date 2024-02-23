@@ -70,12 +70,14 @@
             <span>{{ info.agent_mobile }}</span>
           </p>
         </div>
-        <button
+        <a
+          :href="`tel:${info.shipper.mobile}`"
+          @click="driverCall(info.shipper.id, authStore.user.id)"
           v-if="isBtnShow"
           class="block text-center mx-auto mt-2 md:w-2/3 w-5/6 md:py-3 py-2 bg-green text-white rounded-lg text-sm md:text-lg"
         >
           تماس با صاحب بار
-        </button>
+        </a>
       </div>
     </div>
     <!-- End of Card Body -->
@@ -83,11 +85,15 @@
 </template>
 
 <script setup>
+import useAxios from "~/composables/useAxios";
+
+const { sendRequest } = useAxios();
+
+const authStore = useAuthStore();
 const props = defineProps(["data"]);
 const data = props.data;
 const info = props.data.data;
 const isBtnShow = data.callBtn;
-console.log(info);
 
 const loaders = ref("");
 const loaderArray = [];
@@ -98,4 +104,15 @@ info.loaders.forEach((loader, index) => {
 
 const date = new Date();
 const time = ref(date.toTimeString(info.created_at).slice(0, 5));
+
+async function driverCall(shipperID, driverID) {
+  await sendRequest({
+    method: "POST",
+    url: "/panel/driver/driverCallShipper",
+    data: {
+      advertisments_id: shipperID,
+      user_id: driverID,
+    },
+  });
+}
 </script>

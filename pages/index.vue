@@ -8,6 +8,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: "custom",
+});
+
 function changeRoute() {
   navigateTo("/Auth");
 }

@@ -6,12 +6,25 @@
     </h2>
     <div class="flex items-center justify-center flex-col gap-y-5">
       <LazySectionsBarCard
-        v-for="(card, index) in 4"
-        :key="index"
-        :data="{ callBtn: true }"
+        v-for="(card, index) in data"
+        :key="card.id"
+        :data="{ callBtn: true, data: card }"
       />
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import useAxios from "~/composables/useAxios";
+
+const { sendRequest } = useAxios();
+const data = ref([]);
+
+onMounted(async () => {
+  const res = await sendRequest({
+    method: "GET",
+    url: "/panel/driver/getDriverCargoHistory",
+  });
+  data.value = res.data.data;
+});
+</script>

@@ -72,7 +72,9 @@
         </div>
         <a
           :href="`tel:${info.shipper.mobile}`"
-          @click="driverCall(info.shipper.id, authStore.user.id)"
+          @click="
+            driverCall(info.shipper.shipper_id, authStore.user.driver.driver_id)
+          "
           v-if="isBtnShow"
           class="block text-center mx-auto mt-2 md:w-2/3 w-5/6 md:py-3 py-2 bg-green text-white rounded-lg text-sm md:text-lg"
         >
@@ -106,7 +108,7 @@ const date = new Date();
 const time = ref(date.toTimeString(info.created_at).slice(0, 5));
 
 async function driverCall(shipperID, driverID) {
-  await sendRequest({
+  const res = await sendRequest({
     method: "POST",
     url: "/panel/driver/driverCallShipper",
     data: {

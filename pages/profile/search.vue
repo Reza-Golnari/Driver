@@ -139,16 +139,16 @@ watch(destInput, (newValue, oldValue) => {
 });
 
 async function searchCities(type, value) {
+  isMenu1Open.value = false;
+  isMenu2Open.value = false;
   if (!canFetchCities.value) {
     if (type === "origin") {
       originList.value = [];
-      isMenu1Open.value = false;
       originTitle.value.textContent = "";
       originInput.value = "";
       isOriginSelected.value = false;
     } else {
       destList.value = [];
-      isMenu2Open.value = false;
       destTitle.value.textContent = "";
       destInput.value = "";
       isDestSelected.value = false;

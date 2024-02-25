@@ -19,7 +19,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       });
       if (res.status === 200) {
         authStore.saveUserData(res.data.data);
-        authStore.isActive = res.data.data.isActive;
+        if (authStore && authStore.isActive)
+          authStore.isActive = res.data.data.isActive;
+        else isAuth.value = res.data.data.isActive;
       } else return navigateTo("/");
     }
   }

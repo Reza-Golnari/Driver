@@ -9,6 +9,10 @@ export const useAuthStore = defineStore("auth", {
       isLoggedIn: false,
       isActive: null,
       user: {},
+      location: {
+        long: null,
+        lat: null,
+      },
     };
   },
   persist: true,
@@ -25,6 +29,11 @@ export const useAuthStore = defineStore("auth", {
     logout() {
       Cookie.remove("token");
       this.user = {};
+    },
+
+    setUserLocation(long, lat) {
+      this.location.long = long;
+      this.location.lat = lat;
     },
   },
 });

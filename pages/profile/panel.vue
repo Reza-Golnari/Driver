@@ -73,5 +73,10 @@
 </template>
 
 <script setup>
+import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
+
+onMounted(async () => {
+  locationHandler();
+});
 </script>

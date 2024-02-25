@@ -194,32 +194,14 @@
 </template>
 
 <script setup>
-// import locationHandler from "~/composables/location";
+import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
-
-const clientPosition = reactive({
-  lat: null,
-  long: null,
-});
 
 const showMenu = ref(false);
 const isAuth = computed(() => authStore.isActive);
 
 onMounted(async () => {
-  console.log("mounted");
-  if (navigator.geolocation) {
-    console.log("location true");
-    navigator.geolocation.getCurrentPosition(
-      await function (position) {
-        console.log("getting");
-        clientPosition.lat = position.coords.latitude;
-        clientPosition.long = position.coords.longitude;
-        console.log(clientPosition.lat, clientPosition.long);
-      }
-    );
-  } else {
-    console.log("error");
-  }
+  locationHandler();
 });
 </script>
 

@@ -17,7 +17,12 @@
         <p>{{ authStore.user.mobile }}</p>
       </div>
       <div class="w-24 h-24 rounded-full overflow-hidden border">
-        <img src="/images/profile.jpg" class="object-cover" />
+        <img
+          :src="authStore.user.profile_image"
+          class="object-cover"
+          v-if="authStore.user.profile_image"
+        />
+        <img src="/images/profile.jpg" class="object-cover" v-else />
       </div>
     </div>
     <div

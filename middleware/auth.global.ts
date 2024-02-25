@@ -6,9 +6,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const authStore = useAuthStore();
   const cookies = useCookie("token");
   const token = cookies.value;
-  const isAuth = computed(async () => await authStore.isActive);
-
-  if (isAuth.value === null) {
+  const isAuth = ref(false);
+  if (authStore.isActive) isAuth.value = authStore.isActive;
+  else {
     const res = await sendRequest({
       method: "GET",
       url: "/panel/profile",
@@ -18,7 +18,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (res.status === 200) {
       authStore.saveUserData(res.data.data);
       authStore.isActive = res.data.data.isActive;
-      console.log(isAuth.value);
     } else return navigateTo("/");
   }
 

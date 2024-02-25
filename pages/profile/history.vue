@@ -6,10 +6,12 @@
     </h2>
     <div class="flex items-center justify-center flex-col gap-y-5">
       <LazySectionsBarCard
+        v-if="data.length"
         v-for="(card, index) in data"
         :key="card.id"
         :data="{ callBtn: true, data: card }"
       />
+      <p v-else dir="rtl">سابقه‌ای برای شما یافت نشد!</p>
     </div>
   </div>
 </template>

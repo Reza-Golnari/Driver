@@ -37,7 +37,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     return navigateTo("/profile");
   } else if (to.path === "profile" && isAuth.value) {
     return;
-  } else if (to.fullPath.includes("/profile") && !token && !isAuth.value) {
-    return navigateTo("/");
+  } else if (to.fullPath.includes("/profile") && !token) {
+    return navigateTo("/Auth");
   }
 });

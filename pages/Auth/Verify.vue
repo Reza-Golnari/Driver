@@ -74,14 +74,19 @@
               </div>
             </div>
             <div class="flex items-center justify-around w-full mt-3" dir="rtl">
-              <p class="text-base">صبر کنید، در حال دریافت کد تایید!!</p>
-              <span>
+              <p class="text-base">
+                {{ codeText }}
+              </p>
+              <span v-if="codeLoading">
                 <IconsLoading />
               </span>
             </div>
             <div class="flex flex-col space-y-3">
               <div class="flex items-center justify-end text-sm">
-                <button class="mx-auto border-b border-b-black/50">
+                <button
+                  class="mx-auto border-b border-b-black/50"
+                  @click="sendCode"
+                >
                   کد را دریافت نکردید؟
                 </button>
               </div>
@@ -106,6 +111,9 @@ const inputTwo = ref(null);
 const inputThree = ref(null);
 const inputFour = ref(null);
 const inputFive = ref(null);
+
+const codeLoading = ref(true);
+const codeText = ref("صبر کنید، در حال دریافت کد تایید!!");
 
 function focusNext(e, inputRef) {
   if (e.target.value.length > 0) {
@@ -143,8 +151,10 @@ async function checkToken() {
 }
 
 async function sendCode() {
+  codeLoading.value = true;
+  codeText.value = "صبر کنید، در حال دریافت کد تایید!!";
   try {
-    await sendRequest({
+    const res = await sendRequest({
       method: "POST",
       url: "/otp/send-otp",
       data: {
@@ -154,8 +164,16 @@ async function sendCode() {
         "Content-Type": "application/vnd.api+json",
       },
     });
+    if (res.status === 200) {
+      codeLoading.value = false;
+      codeText.value = "کد تایید برای شما ارسال سد";
+    } else {
+      codeLoading.value = false;
+      codeText.value = "مشکلی در ارسال کد رخ داده است";
+    }
   } catch (error) {
-    console.log(error);
+    codeLoading.value = false;
+    codeText.value = "مشکلی در ارسال کد رخ داده است";
   }
 }
 

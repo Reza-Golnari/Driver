@@ -198,10 +198,6 @@ import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
 
 const showMenu = ref(false);
-const profileImage = computed(() => {
-  if (authStore.user) return authStore.user.profile_image;
-  else console.log(profileImage);
-});
 
 const isAuth = computed(() => {
   if (authStore.user && authStore.user.isActive) return authStore.user.isActive;

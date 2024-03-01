@@ -18,11 +18,15 @@
       </div>
       <div class="w-24 h-24 rounded-full overflow-hidden border">
         <img
-          :src="authStore.user?.profile_image"
+          :src="authStore.user.profile_image"
           class="object-cover"
-          v-if="authStore.user?.profile_image"
+          v-if="authStore.user && authStore.user.profile_image"
         />
-        <img src="/images/profile.jpg" class="object-cover" v-else />
+        <img
+          src="/images/profile.jpg"
+          class="object-cover"
+          v-if="authStore.user && !authStore.user.profile_image"
+        />
       </div>
     </div>
     <div
@@ -43,15 +47,16 @@
       class="py-6 px-4 flex items-center justify-center flex-row-reverse gap-x-5 shadow-md bg-white rounded-lg"
     >
       <p
-        class="py-2 px-4 border rounded-xl shadow-md"
-        :class="[
-          { 'border-green': authStore.user?.isActive },
-          { 'border-red-500': !authStore.user?.isActive },
-          { 'text-green': authStore.user?.isActive },
-          { 'text-red-500': !authStore.user?.isActive },
-        ]"
+        v-if="isAuth"
+        class="py-2 px-4 border rounded-xl shadow-md border-green text-green"
       >
-        {{ authStore.user?.isActive ? "تایید  شده" : "تایید نشده" }}
+        تایید شده
+      </p>
+      <p
+        v-if="!isAuth"
+        class="py-2 px-4 border rounded-xl shadow-md text-red-500 border-red-500"
+      >
+        تایید نشده
       </p>
       <p dir="rtl">شماره موبایل:</p>
       <p>{{ authStore.user?.mobile }}</p>
@@ -75,6 +80,11 @@
 <script setup>
 import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
+
+const isAuth = computed(() => {
+  if (authStore.user) return authStore.user.isActive;
+  else return false;
+});
 
 onMounted(async () => {
   locationHandler();

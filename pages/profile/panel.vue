@@ -11,16 +11,16 @@
         <p
           class="inline py-1 px-4 border border-primary text-primary rounded-xl text-sm"
         >
-          {{ authStore.user.role === "driver" ? "راننده" : "صاحب بار" }}
+          {{ authStore.user?.role === "driver" ? "راننده" : "صاحب بار" }}
         </p>
-        <p>{{ authStore.user.full_name }}</p>
-        <p>{{ authStore.user.mobile }}</p>
+        <p>{{ authStore.user?.full_name }}</p>
+        <p>{{ authStore.user?.mobile }}</p>
       </div>
       <div class="w-24 h-24 rounded-full overflow-hidden border">
         <img
-          :src="authStore.user.profile_image"
+          :src="authStore.user?.profile_image"
           class="object-cover"
-          v-if="authStore.user.profile_image"
+          v-if="authStore.user?.profile_image"
         />
         <img src="/images/profile.jpg" class="object-cover" v-else />
       </div>
@@ -45,16 +45,16 @@
       <p
         class="py-2 px-4 border rounded-xl shadow-md"
         :class="[
-          { 'border-green': authStore.user.isActive },
-          { 'border-red-500': !authStore.user.isActive },
-          { 'text-green': authStore.user.isActive },
-          { 'text-red-500': !authStore.user.isActive },
+          { 'border-green': authStore.user?.isActive },
+          { 'border-red-500': !authStore.user?.isActive },
+          { 'text-green': authStore.user?.isActive },
+          { 'text-red-500': !authStore.user?.isActive },
         ]"
       >
-        {{ authStore.user.isActive ? "تایید  شده" : "تایید نشده" }}
+        {{ authStore.user?.isActive ? "تایید  شده" : "تایید نشده" }}
       </p>
       <p dir="rtl">شماره موبایل:</p>
-      <p>{{ authStore.user.mobile }}</p>
+      <p>{{ authStore.user?.mobile }}</p>
     </div>
     <div class="bg-white p-3 rounded-lg shadow-md">
       <div
@@ -66,7 +66,7 @@
         <p>بارگیر</p>
       </div>
       <p class="flex items-center text-lg gap-x-2 justify-center">
-        {{ authStore.user.driver.loader.name }}
+        {{ authStore.user?.driver.loader.name }}
       </p>
     </div>
   </div>

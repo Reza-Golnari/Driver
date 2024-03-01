@@ -22,14 +22,14 @@
             <img
               class="aspect-square h-full w-full"
               alt="Profile picture"
+              v-if="authStore.user && authStore.user.profile_image"
               :src="authStore.user.profile_image"
-              v-if="authStore.user.profile_image"
             />
             <img
               class="aspect-square h-full w-full"
               alt="Profile picture"
               src="/images/profile.jpg"
-              v-else
+              v-if="authStore.user && !authStore.user.profile_image"
             />
           </NuxtLink>
           <div class="text-3xl flex items-center gap-x-2">
@@ -46,7 +46,7 @@
             class="text-lg font-semibold text-gray-900 rtl text-right"
             dir="rtl"
           >
-            سلام {{ authStore.user.full_name }} خوش آمدید
+            سلام {{ authStore.user?.full_name }} خوش آمدید
           </h1>
           <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>
         </div>
@@ -198,7 +198,15 @@ import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
 
 const showMenu = ref(false);
-const isAuth = computed(() => authStore.isActive);
+const profileImage = computed(() => {
+  if (authStore.user) return authStore.user.profile_image;
+  else console.log(profileImage);
+});
+
+const isAuth = computed(() => {
+  if (authStore.user && authStore.user.isActive) return authStore.user.isActive;
+  else return false;
+});
 
 onMounted(async () => {
   locationHandler();

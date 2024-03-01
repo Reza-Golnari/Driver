@@ -138,7 +138,7 @@ watchEffect(() => {
 
 onMounted(async () => {
   // check user type
-  if (authStore.user.type === "shipper") navigateTo("/Auth/CreateProfile");
+  if (authStore.user?.type === "shipper") navigateTo("/Auth/CreateProfile");
 
   // get loaders
   const res = await sendRequest({

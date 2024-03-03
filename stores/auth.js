@@ -9,7 +9,7 @@ export const useAuthStore = defineStore("auth", {
       isLoggedIn: false,
       user: {
         profile_image: "",
-        isActive: true,
+        isActive: null,
       },
       location: {
         long: null,

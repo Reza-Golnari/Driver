@@ -18,7 +18,6 @@
           <!-- Prefix input mobile -->
           <input
             @keyup.enter="login"
-            @keyup="prefixKeyUp"
             v-model="prefixMobile"
             placeholder="09123456789"
             class="text-xl w-full tracking-widest font-semibold pr-0 m-0 outline-none text-black bg-white full lg pl-2 py-1"
@@ -67,17 +66,6 @@ const loginTitle = computed(() => {
   }
 });
 
-function prefixKeyUp(e) {
-  const value = e.target.value;
-  if (value.toString().length == 4) {
-    focusInputRef(middleInputRef);
-  }
-}
-
-function focusInputRef(inputRef) {
-  inputRef.value.focus();
-}
-
 function validateMobileNumber() {
   if (prefixMobile.value.length)
     if (!prefixMobile.value.toString().trim()[0] != "0") {
@@ -101,7 +89,6 @@ onMounted(() => {
   ) {
     navigateTo("/Auth");
   }
-  focusInputRef(prefixInputRef);
 });
 
 async function login() {

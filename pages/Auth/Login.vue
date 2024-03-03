@@ -20,35 +20,11 @@
             @keyup.enter="login"
             @keyup="prefixKeyUp"
             v-model="prefixMobile"
-            placeholder="0993"
-            class="text-xl w-16 tracking-widest font-semibold pr-0 m-0 outline-none text-black bg-white full lg pl-2 py-1"
-            size="4"
-            maxlength="4"
+            placeholder="09123456789"
+            class="text-xl w-full tracking-widest font-semibold pr-0 m-0 outline-none text-black bg-white full lg pl-2 py-1"
+            size="12"
+            maxlength="12"
             ref="prefixInputRef"
-          />
-
-          <!-- Middle input mobile -->
-          <input
-            @keyup.enter="login"
-            @keyup="middleKeyUp"
-            v-model="middleMobile"
-            ref="middleInputRef"
-            placeholder="933"
-            class="text-xl w-16 font-semibold pr-0 m-0 outline-none tracking-widest text-red-500 bg-white full lg pl-2 py-1 placeholder:text-primary placeholder:opacity-80"
-            size="3"
-            maxlength="3"
-          />
-
-          <!-- Suffix input mobile -->
-          <input
-            @keyup.enter="login"
-            v-model="suffixMobile"
-            @keyup="suffixKeyUp"
-            placeholder="3664"
-            size="4"
-            ref="suffixInputRef"
-            maxlength="4"
-            class="text-xl font-semibold tracking-widest outline-none text-red-500 bg-white full lg pr-2 py-1 placeholder:text-primary placeholder:opacity-80"
           />
         </div>
         <p
@@ -77,11 +53,7 @@ const authStore = useAuthStore();
 
 const route = useRoute();
 const prefixMobile = ref("");
-const middleMobile = ref("");
-const suffixMobile = ref("");
 const prefixInputRef = ref(null);
-const middleInputRef = ref(null);
-const suffixInputRef = ref(null);
 const loginButtonRef = ref(null);
 const errorMessage = ref("");
 
@@ -102,26 +74,6 @@ function prefixKeyUp(e) {
   }
 }
 
-function middleKeyUp(e) {
-  const value = e.target.value;
-  if (value.toString().length == 3) {
-    focusInputRef(suffixInputRef);
-  } else if (value.toString().length == 0 && e.code == "Backspace") {
-    // focus prefix input ref
-    focusInputRef(prefixInputRef);
-  }
-}
-
-function suffixKeyUp(e) {
-  const value = e.target.value;
-  if (value.toString().length == 4) {
-    focusInputRef(loginButtonRef);
-  } else if (value.toString().length == 0 && e.code == "Backspace") {
-    // focus middle input ref
-    focusInputRef(middleInputRef);
-  }
-}
-
 function focusInputRef(inputRef) {
   inputRef.value.focus();
 }
@@ -132,11 +84,7 @@ function validateMobileNumber() {
       errorMessage.value = "لطفا شماره موبایل را درست وارد کنید";
       return false;
     }
-  if (
-    Number(
-      prefixMobile.value + middleMobile.value + suffixMobile.value
-    ).toString().length < 10
-  ) {
+  if (Number(prefixMobile.value).toString().length < 10) {
     errorMessage.value = "لطفا شماره موبایل را درست وارد کنید";
     return false;
   }
@@ -163,7 +111,7 @@ async function login() {
   }
   //  save data in store(pinia)
   authStore.saveLoginData({
-    mobile: prefixMobile.value + middleMobile.value + suffixMobile.value,
+    mobile: prefixMobile.value,
     type: route.query.type,
   });
 

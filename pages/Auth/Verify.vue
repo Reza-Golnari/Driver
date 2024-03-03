@@ -142,7 +142,9 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      if (res.data.data.token) {
+      if (!res || res.status !== 200) {
+        codeText.value = "خطا در صحت سنجی کد تایید";
+      } else if (res.data.data.token) {
         Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
       }

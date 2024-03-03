@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const authStore = useAuthStore();
   const cookies = useCookie("token");
   const token = cookies.value;
-  const isAuth: any = ref(false);
+  const isAuth: any = ref(true);
   if (authStore && authStore.user)
     isAuth.value = computed(() => authStore.user.isActive);
 

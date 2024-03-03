@@ -105,6 +105,7 @@ import useAxios from "~/composables/useAxios";
 
 const { sendRequest } = useAxios();
 const authStore = useAuthStore();
+const appStore = useAppStore();
 
 const inputOne = ref(null);
 const inputTwo = ref(null);
@@ -144,6 +145,7 @@ async function checkToken() {
       });
       if (!res || res.status !== 200) {
         codeText.value = "خطا در صحت سنجی کد تایید";
+        appStore.showAlert(true, "مشکلی در صحت سنجی کد تایید بوجود آمده است");
       } else if (res.data.data.token) {
         Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
@@ -176,6 +178,7 @@ async function sendCode() {
   } catch (error) {
     codeLoading.value = false;
     codeText.value = "مشکلی در ارسال کد رخ داده است";
+    appStore.showAlert(true, "مشکلی در ارسال کد تایید رخ داده است");
   }
 }
 

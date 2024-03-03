@@ -104,8 +104,8 @@
           <div data-v0-t="card" class="space-y-3">
             <NuxtLink
               :to="isAuth ? '/profile/map' : ''"
-              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
-              :class="{ 'bg-gray-300': !isAuth }"
+              class="flex items-center justify-between w-full p-4 pl-2 rounded-md shadow gap-x-3"
+              :class="[{ 'bg-gray-300': !isAuth }, { 'bg-white': isAuth }]"
               dir="rtl"
             >
               <img src="~/assets/icons/nearby-icon.svg" class="w-10" />
@@ -119,8 +119,8 @@
             </NuxtLink>
             <NuxtLink
               :to="isAuth ? '/profile/search' : ''"
-              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
-              :class="{ 'bg-gray-300': !isAuth }"
+              class="flex items-center justify-between w-full p-4 pl-2 rounded-md shadow gap-x-3"
+              :class="[{ 'bg-gray-300': !isAuth }, { 'bg-white': isAuth }]"
               dir="rtl"
             >
               <img src="~/assets/icons/search-advertiesment.svg" class="w-10" />
@@ -134,8 +134,8 @@
             </NuxtLink>
             <NuxtLink
               :to="isAuth ? '/profile/history' : ''"
-              class="flex items-center justify-between w-full p-4 pl-2 bg-white rounded-md shadow gap-x-3"
-              :class="{ 'bg-gray-300': !isAuth }"
+              class="flex items-center justify-between w-full p-4 pl-2 rounded-md shadow gap-x-3"
+              :class="[{ 'bg-gray-300': !isAuth }, { 'bg-white': isAuth }]"
               dir="rtl"
             >
               <img src="~/assets/icons/driver-history.svg" class="w-10" />
@@ -199,10 +199,7 @@ const authStore = useAuthStore();
 
 const showMenu = ref(false);
 
-const isAuth = computed(() => {
-  if (authStore.user && authStore.user.isActive) return authStore.user.isActive;
-  else return false;
-});
+const isAuth = computed(() => authStore.user.isActive);
 
 onMounted(async () => {
   locationHandler();

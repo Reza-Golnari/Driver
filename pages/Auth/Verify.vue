@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen p-4">
+  <div class="flex flex-col items-center justify-center min-h-screen p-4 gap-y-4">
     <div class="flex h-52 w-52 -mr-24 justify-center">
       <img alt="Phone" class="h-max mx-auto" src="/images/sms.png" />
     </div>

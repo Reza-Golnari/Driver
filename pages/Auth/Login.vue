@@ -38,7 +38,7 @@
       <button
         ref="loginButtonRef"
         @click="login"
-        class="inline-block w-full py-3 rounded-lg bg-primary text-center text-white outline-none"
+        class="inline-block w-full py-3 rounded-lg bg-primary text-center text-white outline-none cursor-pointer"
       >
         {{ loginTitle }}
       </button>

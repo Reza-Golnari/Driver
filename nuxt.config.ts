@@ -31,4 +31,5 @@ export default defineNuxtConfig({
       ],
     },
   },
+  plugins:["~/plugins/auth.ts"]
 });

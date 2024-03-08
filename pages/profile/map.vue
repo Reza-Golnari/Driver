@@ -188,8 +188,8 @@ onMounted(async () => {
     method: "POST",
     url: "/panel/driver/advertisers/search-cargo",
     data: {
-      destination_id: 134555,
-      origin_id: 134555,
+      destination_id: advStore.destID,
+      origin_id: advStore.originID,
     },
   });
   if (res.status === 200) data.value = res.data.data;

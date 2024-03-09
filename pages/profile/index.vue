@@ -86,7 +86,7 @@
           </p>
           <p>نزدیک شماست</p>
           <NuxtLink
-            to="/"
+            to="/profile/search"
             class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
             >شروع به کار</NuxtLink
           >

@@ -39,11 +39,12 @@
       </div>
 
       <SectionsBarCard
-        class="my-3"
+        class="my-3 box-card"
         v-if="data.length"
         v-for="card in data"
         :key="data.id"
         :data="{ callBtn: true, data: card }"
+        :id="card.id"
       />
       <p class="text-center" v-else>هیچ باری یافت نشد</p>
       <div
@@ -91,6 +92,7 @@
 <script setup>
 import NeshanMap from "@neshan-maps-platform/vue3-openlayers";
 import useAxios from "~/composables/useAxios";
+import {colorToGlsl} from "ol/expr/gpu.js";
 
 const { sendRequest } = useAxios();
 const advStore = useAdvStore();
@@ -101,6 +103,24 @@ const originTitle = ref();
 const destTitle = ref();
 
 const data = ref([]);
+
+function isElementVisible(element){
+  const {top , left , bottom , right} = element.getBoundingClientRect();
+
+  return (top >= 0 && left >= 0 && bottom <= window.innerHeight && right <= window.innerWidth);
+}
+
+async function seenCard(id){
+  const res = await sendRequest({
+    method: 'POST',
+    url: '/panel/driver/advertisers/addview',
+    data: {
+      id,
+    }
+  });
+
+  console.log(res);
+}
 
 function openMenu(menu) {
   if (menu === "menu1") {
@@ -120,13 +140,25 @@ function setDest(data) {
 }
 
 onMounted(async () => {
+  window.addEventListener('scroll' , ()=>{
+    const cards = document.querySelectorAll(".box-card");
+    cards.forEach(card=>{
+      if(isElementVisible(card)){
+        seenCard(card.id);
+      }
+    });
+  });
+
   if (
     !advStore.originName ||
     !advStore.destName ||
     !advStore.originID ||
     !advStore.destID
   )
-    navigateTo("/");
+    navigateTo("/profile/search");
+
+
+
   const res = await sendRequest({
     method: "POST",
     url: "/panel/driver/advertisers/search-cargo",
@@ -136,6 +168,10 @@ onMounted(async () => {
     },
   });
   if (res.status === 200) data.value = res.data.data;
+
+
+
+
 });
 
 const origin = [advStore.originLat, advStore.originLon];

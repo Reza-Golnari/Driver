@@ -6,6 +6,8 @@ export default function useAxios() {
   const BASEURL = config.public.API_BASE_URL;
   const token = Cookie.get("token");
 
+  const appStore = useAppStore();
+
   const headers = {
     "Content-Type": "application/json",
     Accept: "application/vnd.api+json",
@@ -27,6 +29,7 @@ export default function useAxios() {
       return response;
     } catch (err) {
       console.error(err);
+      appStore.showAlert(true , "خطا در انجام عملیات")
       throw err;
     }
   }

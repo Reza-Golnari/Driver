@@ -52,6 +52,9 @@
 
 <script setup>
 import useAxios from "~/composables/useAxios";
+
+const appStore = useAppStore();
+
 const authStore = useAuthStore();
 const userNameInput = ref();
 const userCodeInput = ref();
@@ -109,6 +112,7 @@ async function submitForm() {
     navigateTo("/Auth/CarType");
   } else {
     errorMsg.value.textContent = res.message;
+    appStore.showAlert(true , "خطایی در ثبت اطلاعات رخ داده است")
   }
 }
 </script>

@@ -26,6 +26,7 @@
     "cookie-universal-nuxt": "^2.2.2",
     "js-cookie": "^3.0.5",
     "mapbox-gl": "^3.1.2",
+    "nuxt-swiper": "^1.2.2",
     "ol": "^8.2.0",
     "pinia": "^2.1.7",
     "vuejs-neshan-map-leaflet": "^1.1.7",

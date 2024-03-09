@@ -1,5 +1,5 @@
 <template>
-  <div class="relative md:w-2/3 max-h-screen rtl">
+  <div class="relative md:w-2/3  overflow-x-hidden">
     <div
       class="fixed top-0 left-0 w-screen h-screen bg-black/30 z-10"
       v-if="showMenu"
@@ -51,8 +51,8 @@
           <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>
         </div>
         <div>
-          <div class="relative">
-            <swiper :modules="[SwiperAutoplay]" :autoplay="{
+          <div class="relative w-full">
+            <swiper class="w-full" :modules="[SwiperAutoplay]" :slides-per-view="1" :autoplay="{
       delay: 2000,
       disableOnInteraction: true,
     }">

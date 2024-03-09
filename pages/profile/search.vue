@@ -179,6 +179,8 @@ function setOrigin(data) {
   isMenu1Open.value = false;
   isOriginSelected.value = true;
   advStore.destID = data.id;
+  advStore.destLongitude = data.longitude;
+  advStore.destLatitude = data.latitude;
 }
 
 function setDestination(data) {
@@ -187,6 +189,8 @@ function setDestination(data) {
   isMenu2Open.value = false;
   isDestSelected.value = true;
   advStore.originID = data.id;
+  advStore.originLongitude = data.longitude;
+  advStore.originLatitude = data.latitude;
 }
 
 function change() {

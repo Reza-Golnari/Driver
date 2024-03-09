@@ -10,6 +10,8 @@
         serviceKey="service.90f18a9ef8ab47d0a983042d07f49e64"
         mapType="dreamy"
         :center="{ latitude: 35.8668, longitude: 47.60506 }"
+        :origin="{ latitude: 45.703111, longitude: 5.428056 }"
+        :destination="{ latitude: 3.693778, longitude: 57.380412 }"
         :scale="0.5"
         poi="false"
         class="w-full h-72 shadow-md rounded-md"
@@ -18,7 +20,6 @@
       <div class="w-5/6 my-5 space-y-3">
         <div
           class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer"
-          @click="openMenu('menu1')"
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
             <IconsCircle class="text-primary text-2xl" />
@@ -26,70 +27,25 @@
               {{ advStore.originName }}
             </p>
           </div>
-          <IconsDownArrow class="text-primary text-lg" />
-          <div
-            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
-            :class="[{ invisible: !isMenu1Open }]"
-            @click="isMenu1Open = true"
-          >
-            <ul
-              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg pb-2 h-96 divide-primary border-2 border-primary"
-              :class="[
-                { '-bottom-0': isMenu1Open },
-                { '-bottom-full': !isMenu1Open },
-              ]"
-            >
-              <li
-                v-for="(city, index) in cities"
-                :key="index"
-                class="p-3 pb-1"
-                @click="setOrigin(city)"
-              >
-                {{ city.title }}
-              </li>
-            </ul>
-          </div>
         </div>
         <div
           class="relative flex flex-row-reverse items-center justify-between bg-white p-4 rounded-lg shadow-md cursor-pointer"
-          @click="openMenu('menu2')"
         >
           <div class="flex items-center gap-x-2 flex-row-reverse">
             <IconsLocation class="text-primary text-2xl" />
             <p class="text-black/70" ref="destTitle">{{ advStore.destName }}</p>
-          </div>
-          <IconsDownArrow class="text-primary text-lg" />
-          <div
-            class="fixed left-0 top-0 h-screen w-screen bg-black/50 z-50"
-            :class="[{ invisible: !isMenu2Open }]"
-            @click="isMenu2Open = true"
-          >
-            <ul
-              class="fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-[800px] bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-lg drop1 h-96 divide-primary border-2 border-primary"
-              :class="[
-                { '-bottom-0': isMenu2Open },
-                { '-bottom-full': !isMenu2Open },
-              ]"
-            >
-              <li
-                v-for="(city, index) in cities"
-                :key="index"
-                class="p-3 pb-1"
-                @click="setDest(city)"
-              >
-                {{ city.title }}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
 
       <SectionsBarCard
         class="my-3"
+        v-if="data.length"
         v-for="card in data"
         :key="data.id"
         :data="{ callBtn: true, data: card }"
       />
+      <p class="text-center" v-else>هیچ باری یافت نشد</p>
       <div
         class="fixed bottom-2 w-11/12 md:w-[500px] bg-white py-2 shadow-md rounded-md"
       >
@@ -146,19 +102,6 @@ const destTitle = ref();
 
 const data = ref([]);
 
-const cities = ref([
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "مشهد", subtitle: "استان مشهد" },
-  { title: "یزد", subtitle: "استان یزد" },
-  { title: "تهران", subtitle: "استان تهران" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-  { title: "اصفهان", subtitle: "استان اصفهان" },
-]);
-
 function openMenu(menu) {
   if (menu === "menu1") {
     isMenu1Open.value = !isMenu1Open.value;
@@ -194,6 +137,9 @@ onMounted(async () => {
   });
   if (res.status === 200) data.value = res.data.data;
 });
+
+const origin = [advStore.originLat, advStore.originLon];
+const destination = [advStore.destLat, advStore.destLon];
 </script>
 
 <style>

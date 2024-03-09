@@ -29,7 +29,6 @@ export default function useAxios() {
       return response;
     } catch (err) {
       console.error(err);
-      appStore.showAlert(true , "خطا در انجام عملیات")
       throw err;
     }
   }

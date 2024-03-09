@@ -52,30 +52,28 @@
         </div>
         <div>
           <div class="relative">
-            <img
-              alt="Desert landscape"
-              class="w-full h-48 object-cover rounded-lg"
-              height="200"
-              src="/images/truck.png"
-              width="350"
-              style="aspect-ratio: 350 / 200; object-fit: cover"
-            />
+            <swiper :modules="[SwiperAutoplay]" :autoplay="{
+      delay: 2000,
+      disableOnInteraction: true,
+    }">
+              <swiper-slide>
+                <img src="/images/profile-slider/truck.png" class="rounded-lg">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="/images/profile-slider/slide-2.jpg" class="rounded-lg">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="/images/profile-slider/slide-3.jpg" class="rounded-lg">
+              </swiper-slide>
             <div
-              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent rounded-b-lg"
+              class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent rounded-b-lg z-20 text-white"
             >
-              <h2 class="text-white font-semibold text-right">
+              <h2 class="font-semibold text-right" dir="rtl">
                 اولین اکوسیستم حمل و نقلی برتر کشور !
               </h2>
-              <p class="text-right">ما با واسطه ها میانه ای نداریم!</p>
+              <p class="text-right" dir="rtl">ما با واسطه ها میانه ای نداریم!</p>
             </div>
-            <div
-              class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1"
-            >
-              <div class="h-2 w-2 bg-white rounded-full"></div>
-              <div class="h-2 w-2 bg-white rounded-full"></div>
-              <div class="h-2 w-2 bg-white rounded-full"></div>
-              <div class="h-2 w-2 bg-red-500 rounded-full"></div>
-            </div>
+            </swiper>
           </div>
         </div>
         <div
@@ -83,7 +81,7 @@
           class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
         >
           <p class="" dir="rtl">
-            <span>167</span>
+            <span>0</span>
             بار
           </p>
           <p>نزدیک شماست</p>

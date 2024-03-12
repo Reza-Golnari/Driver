@@ -130,12 +130,19 @@ const isOriginSelected = ref(false);
 const isDestSelected = ref(false);
 
 watch(originInput, (newValue, oldValue) => {
-  if (oldValue && !newValue) canFetchCities.value = false;
-  else canFetchCities.value = true;
+   if (oldValue && !newValue) {
+     isMenu1Open.value = true;
+     canFetchCities.value = false;
+   }
+   else canFetchCities.value = true;
 });
+
 watch(destInput, (newValue, oldValue) => {
-  if (oldValue && !newValue) canFetchCities.value = false;
-  else canFetchCities.value = true;
+   if (oldValue && !newValue) {
+     isMenu2Open.value = false;
+     canFetchCities.value = false;
+   }
+   else canFetchCities.value = true;
 });
 
 async function searchCities(type, value) {
@@ -155,6 +162,9 @@ async function searchCities(type, value) {
     }
     return;
   }
+
+  if(value.length < 2) return
+
   const res = await sendRequest({
     method: "POST",
     url: "/panel/map/search",
@@ -163,6 +173,7 @@ async function searchCities(type, value) {
     },
   });
   if (res.status === 200) {
+    if(!res.data.data.length) return
     if (type === "origin") {
       originList.value = res.data.data;
       isMenu1Open.value = true;

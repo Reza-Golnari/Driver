@@ -15,6 +15,7 @@ export const useAuthStore = defineStore("auth", {
         long: null,
         lat: null,
       },
+      nearNumber: 0,
     };
   },
   persist: true,

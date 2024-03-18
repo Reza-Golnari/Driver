@@ -16,7 +16,7 @@
                   @input="checkToken"
                   @keyup="(e) => focusNext(e, inputTwo)"
                   ref="inputOne"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-4 outline-none bg-transparent"
                   type="text"
                   pattern="[0-9]"
                   v-model="one"
@@ -28,7 +28,7 @@
                   @input="checkToken"
                   @keyup="(e) => focusNext(e, inputThree)"
                   ref="inputTwo"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-4 outline-none bg-transparent"
                   type="text"
                   v-model="two"
                   pattern="[0-9]"
@@ -40,7 +40,7 @@
                   @input="checkToken"
                   @keyup="(e) => focusNext(e, inputFour)"
                   ref="inputThree"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-4 outline-none bg-transparent"
                   type="text"
                   v-model="three"
                   pattern="[0-9]"
@@ -52,7 +52,7 @@
                   @input="checkToken"
                   @keyup="(e) => focusNext(e, inputFive)"
                   ref="inputFour"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-4 outline-none bg-transparent"
                   type="text"
                   v-model="four"
                   size="1"
@@ -64,7 +64,7 @@
                 <input
                   @input="checkToken"
                   ref="inputFive"
-                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center pl-5 pr-5 outline-none bg-transparent"
+                  class="text-4xl text-light-green-number w-full border-l-0 border-r-0 border-t-0 border-b-2 text-green border-gray-400 h-full flex flex-col items-center justify-center text-center px-4 outline-none bg-transparent"
                   type="text"
                   v-model="five"
                   size="1"
@@ -146,6 +146,10 @@ async function checkToken() {
       if (!res || res.status !== 200) {
         codeText.value = "خطا در صحت سنجی کد تایید";
         appStore.showAlert(true, "مشکلی در صحت سنجی کد تایید بوجود آمده است");
+      }else if(res.data.data.profile.full_name){
+        authStore.saveUserData(res.data.data.profile);
+        Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
+        navigateTo("/profile")
       } else if (res.data.data.token) {
         Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
         navigateTo("/Auth/CreateProfile");
@@ -170,7 +174,7 @@ async function sendCode() {
     });
     if (res.status === 200) {
       codeLoading.value = false;
-      codeText.value = "کد تایید برای شما ارسال سد";
+      codeText.value = "کد تایید برای شما ارسال شد";
     } else {
       codeLoading.value = false;
       codeText.value = "مشکلی در ارسال کد رخ داده است";

@@ -29,7 +29,7 @@ export default async function locationHandler() {
           }
       });
 
-      if(res.status === 200) authStore.nearNumber = res.data.data.length;
+      if(res.status === 200) authStore.barNumber = res.data.data.length;
       else appStore.showAlert(true , "مشکلی در گرفتن بارهای نزدیک شما بوجود آمد")
   }catch(err){
       appStore.showAlert(true , "مشکلی در گرفتن بارهای نزدیک شما بوجود آمد")

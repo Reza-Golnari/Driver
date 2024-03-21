@@ -48,7 +48,7 @@
           >
             سلام {{ authStore.user?.full_name }} خوش آمدید
           </h1>
-          <p class="text-gray-600 text-right">امروز بار کجا میخای؟</p>
+          <p class="text-gray-600 text-right">{{authStore.userRole === 'driver' ? "امروز بار کجا میخای؟" : 'برای اعلام باری آماده ای؟'}}</p>
         </div>
         <div>
           <div class="relative w-full">
@@ -81,7 +81,7 @@
           class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
         >
           <p class="" dir="rtl">
-            <span>{{authStore.nearNumber}}</span>
+            <span>{{authStore.barNumber}}</span>
             بار
           </p>
           <p>نزدیک شماست</p>
@@ -96,15 +96,10 @@
             class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
         >
           <p class="" dir="rtl">
-            <span>{{authStore.nearNumber}}</span>
+            <span>{{authStore.barNumber}}</span>
             بار
           </p>
-          <p>نزدیک شماست</p>
-          <NuxtLink
-              to="/profile/map"
-              class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
-          >شروع به کار</NuxtLink
-          >
+          <p>اعلام کرده اید</p>
         </div>
         <p
           class="p-4 my-3 rounded-md text-xs bg-primary text-white"
@@ -113,7 +108,7 @@
         >
           پیام سیستم : احراز هویت شما در دست تایید می‌باشد!
         </p>
-        <div>
+        <div v-if="authStore.userRole !== 'driver'">
           <div data-v0-t="card" class="space-y-3">
             <NuxtLink
               :to="isAuth ? '/profile/map' : ''"
@@ -156,6 +151,40 @@
                 <h6 class="font-bold text-black/90">تاریخچه بارهای من</h6>
                 <p class="md:text-sm text-xs">
                   در خواست های حمل خود را اینجا ببینید
+                </p>
+              </div>
+              <IconsForwardArrow />
+            </NuxtLink>
+          </div>
+        </div>
+        <div v-else>
+          <div data-v0-t="card" class="space-y-3">
+            <NuxtLink
+              :to="isAuth ? '/profile/define-bar' : ''"
+              class="flex items-center justify-between w-full p-4 pl-2 rounded-md shadow gap-x-3"
+              :class="[{ 'bg-gray-300': !isAuth }, { 'bg-white': isAuth }]"
+              dir="rtl"
+            >
+              <img src="~/assets/icons/bar.png" class="w-10" />
+              <div class="w-3/4">
+                <h6 class="font-bold text-black/90">اعلام باری کنید</h6>
+                <p class="md:text-sm text-xs">
+                  مناسب ترین رانندگان با شما تماس خواهند گرفت
+                </p>
+              </div>
+              <IconsForwardArrow />
+            </NuxtLink>
+            <NuxtLink
+              :to="isAuth ? '/profile/history' : ''"
+              class="flex items-center justify-between w-full p-4 pl-2 rounded-md shadow gap-x-3"
+              :class="[{ 'bg-gray-300': !isAuth }, { 'bg-white': isAuth }]"
+              dir="rtl"
+            >
+              <img src="~/assets/icons/bar-histofy.png" class="w-10" />
+              <div class="w-3/4">
+                <h6 class="font-bold text-black/90">فهرست اعلام باری</h6>
+                <p class="md:text-sm text-xs">
+                بارهایی که اعلام کرده اید را مشاهده کنید
                 </p>
               </div>
               <IconsForwardArrow />

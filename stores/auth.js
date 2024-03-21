@@ -40,4 +40,10 @@ export const useAuthStore = defineStore("auth", {
       this.location.lat = lat;
     },
   },
+
+  getters:{
+    userRole(){
+      return this.user.role
+    }
+  }
 });

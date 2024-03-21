@@ -77,7 +77,7 @@
           </div>
         </div>
         <div
-          v-if="isAuth"
+          v-if="isAuth && authStore.userRole === 'driver'"
           class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
         >
           <p class="" dir="rtl">
@@ -89,6 +89,21 @@
             to="/profile/map"
             class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
             >شروع به کار</NuxtLink
+          >
+        </div>
+        <div
+            v-else-if="isAuth && authStore.userRole === 'shipper'"
+            class="bg-secondary text-white text-xl flex items-center justify-center flex-col my-3 px-3 py-5 rounded-lg"
+        >
+          <p class="" dir="rtl">
+            <span>{{authStore.nearNumber}}</span>
+            بار
+          </p>
+          <p>نزدیک شماست</p>
+          <NuxtLink
+              to="/profile/map"
+              class="mt-3 py-3 px-20 rounded-lg bg-white text-base text-secondary font-bold"
+          >شروع به کار</NuxtLink
           >
         </div>
         <p
@@ -199,7 +214,7 @@ const showMenu = ref(false);
 
 const isAuth = computed(() => authStore.user.isActive);
 
-onMounted(async () => {
+onMounted( () => {
   locationHandler();
 });
 </script>

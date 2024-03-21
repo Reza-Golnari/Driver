@@ -1,15 +1,23 @@
 <template>
   <div
-    class="max-w-96 h-screen flex flex-col justify-center gap-y-4 py-3 pb-10"
+    class="max-w-96 min-w-80  h-screen flex flex-col justify-center gap-y-4 py-3 pb-10"
   >
     <!-- Back Button -->
     <SectionsBackButton />
     <div class="flex gap-4 flex-col items-between space-y-12">
       <img
+        src="/images/bar.png"
+        alt="bar login"
+        class="w-56 object-fill mx-auto"
+        style="object-fit: cover"
+        v-if="isShipper"
+      />
+      <img
         src="/images/trucklogin.png"
         alt="Truck login"
-        class="max-w-xs object-fill"
+        class="w-80 object-fill mx-auto"
         style="object-fit: cover"
+        v-else
       />
       <div>
         <div
@@ -51,6 +59,9 @@ import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 
 const route = useRoute();
+
+const isShipper = computed(()=> route.query.type === "shipper")
+
 const prefixMobile = ref("");
 const prefixInputRef = ref(null);
 const loginButtonRef = ref(null);

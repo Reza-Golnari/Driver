@@ -1,21 +1,22 @@
 <template>
   <nav
-    class="fixed right-0 top-0 h-full w-72 md:w-96 bg-mainBg ml-auto flex flex-col md:p-8 p-4 z-20"
+    class="fixed right-0 top-0 h-full w-72 md:w-96 bg-mainBg ml-auto flex flex-col md:p-8 p-4 z-50"
   >
     <div class="flex items-center justify-center">
       <img src="/images/line-logo.png" class="w-4/5" />
     </div>
     <div class="flex items-center justify-end mt-10 gap-x-4">
       <div class="text-end space-y-2">
-        <p dir="rtl">{{ authStore.user?.full_name }}</p>
+        <p>{{ authStore.user?.full_name }}</p>
         <p>{{ authStore.user?.mobile }}</p>
       </div>
-      <div class="w-1/3 rounded-full overflow-hidden">
+      <div class="w-14 rounded-full overflow-hidden">
         <img
+            class="w-14 h-14 ob rounded-full oject-cover"
           :src="authStore.user?.profile_image"
           v-if="authStore.user?.profile_image"
         />
-        <img src="/images/profile.jpg" v-else />
+        <img src="/images/profile.jpg" class="w-14 h-14 object-cover rounded-full o" v-else />
       </div>
     </div>
     <ul class="mt-5 pr-3 space-y-5">

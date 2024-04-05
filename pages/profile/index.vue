@@ -1,7 +1,7 @@
 <template>
   <div class="relative md:w-2/3  overflow-x-hidden">
     <div
-      class="fixed top-0 left-0 w-screen h-screen bg-black/30 z-10"
+      class="fixed top-0 left-0 w-screen h-screen bg-black/30 z-40"
       v-if="showMenu"
       @click="showMenu = false"
     />
